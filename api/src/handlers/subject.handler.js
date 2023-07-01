@@ -37,10 +37,10 @@ const getSubjectById = async (req, res) => {
 const createSubject = async (req, res) => {
   try {
     // Obtener los datos del cuerpo de la solicitud
-    const { name } = req.body;
+    const { name, professorId  } = req.body;
 
     // Crear una nueva materia en la base de datos
-    const subject = await Subject.create({ name });
+    const subject = await Subject.create({ name, professorId });
 
     // Devolver la materia creada
     res.status(201).json(subject);
