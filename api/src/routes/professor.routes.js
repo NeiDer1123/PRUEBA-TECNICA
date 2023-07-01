@@ -1,25 +1,25 @@
-const { Router } = require("express")
+const { Router } = require("express");
 
-const router = Router()
+const professorRouter = Router();
 
-router.get("/professor", (req, res)=>{
-    res.send("Rertornando la lista de profesores")
-})
+professorRouter.get("/", (req, res) => {
+  res.send("Rertornando la lista de profesores");
+});
 
-router.get("/professor/:id", (req, res)=>{
-    res.send("Rertornando un solo profesor")
-})
+professorRouter.get("/:id", (req, res) => {
+  res.send("Rertornando un solo profesor");
+});
 
-router.post("/professor", (req, res)=>{
-    res.send("Creando un profesor")
-})
+professorRouter.post("/", (req, res) => {
+  res.send("Creando un profesor");
+});
 
-router.delete("/professor", (req, res)=>{
-    res.send("Eliminar un profesor")
-})
+professorRouter.delete("/", (req, res) => {
+  res.send("Eliminar un profesor");
+});
 
-router.put("/professor", (req, res)=>{
-    res.send("Actualizando un profesor")
-})
+professorRouter.put("/", (req, res) => {
+  res.send("Actualizando un profesor");
+});
 
-module.exports = router
+module.exports = professorRouter;

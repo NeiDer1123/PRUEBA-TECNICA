@@ -1,25 +1,25 @@
-const { Router } = require("express")
+const { Router } = require("express");
 
-const router = Router()
+const subjectRouter = Router();
 
-router.get("/subject", (req, res)=>{
-    res.send("Rertornando la lista de materia")
-})
+subjectRouter.get("/", (req, res) => {
+  res.send("Rertornando la lista de materia");
+});
 
-router.get("/subject/:id", (req, res)=>{
-    res.send("Rertornando un solo materia")
-})
+subjectRouter.get("/:id", (req, res) => {
+  res.send("Rertornando un solo materia");
+});
 
-router.post("/subject", (req, res)=>{
-    res.send("Creando un materia")
-})
+subjectRouter.post("/", (req, res) => {
+  res.send("Creando un materia");
+});
 
-router.delete("/subject", (req, res)=>{
-    res.send("Eliminar un materia")
-})
+subjectRouter.delete("/", (req, res) => {
+  res.send("Eliminar un materia");
+});
 
-router.put("/subject", (req, res)=>{
-    res.send("Actualizando un materia")
-})
+subjectRouter.put("/", (req, res) => {
+  res.send("Actualizando un materia");
+});
 
-module.exports = router
+module.exports = subjectRouter;
