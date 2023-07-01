@@ -53,7 +53,7 @@ const createStudent = async (req, res) => {
     res.status(201).json(student);
   } catch (error) {
     // Manejar el error en caso de que ocurra
-    res.status(500).json({ error: "Error al crear el estudiante" });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -111,7 +111,7 @@ const updateStudent = async (req, res) => {
     res.status(200).json({ message: "Estudiante actualizado correctamente" });
   } catch (error) {
     // Manejar el error en caso de que ocurra
-    res.status(500).json({ error: "Error al actualizar el estudiante" });
+    res.status(500).json({ error: error.message });
   }
 };
 
