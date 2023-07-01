@@ -37,7 +37,7 @@ Student.belongsToMany(Subject, {
   foreignKey: "studentId",
 });
 Subject.belongsToMany(Student, {
-  through: "EstudianteAsignatura",
+  through: "student_subject",
   foreignKey: "subjectId",
 });
 
