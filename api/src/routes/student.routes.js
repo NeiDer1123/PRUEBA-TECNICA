@@ -1,25 +1,25 @@
 const { Router } = require("express");
+const { getStudentRatingSubjectAndProfessor } = require("../handlers/relations.handler")
+const {
+  getAllStudent,
+  getStudentById,
+  createStudent,
+  deleteStudent,
+  updateStudent,
+} = require("../handlers/student.handler");
 
 const studentRouter = Router();
 
-studentRouter.get("/", (req, res) => {
-  res.send("Rertornando la lista de estudiante");
-});
+studentRouter.get("/", getAllStudent);
 
-studentRouter.get("/:id", (req, res) => {
-  res.send("Rertornando un solo estudiante");
-});
+studentRouter.get("/:id", getStudentById);
 
-studentRouter.post("/", (req, res) => {
-  res.send("Creando un estudiante");
-});
+studentRouter.post("/", createStudent);
 
-studentRouter.delete("/", (req, res) => {
-  res.send("Eliminar un estudiante");
-});
+studentRouter.delete("/:id", deleteStudent);
 
-studentRouter.put("/", (req, res) => {
-  res.send("Actualizando un estudiante");
-});
+studentRouter.put("/:id", updateStudent);
+
+studentRouter.get("/:studentId/report", getStudentRatingSubjectAndProfessor)
 
 module.exports = studentRouter;

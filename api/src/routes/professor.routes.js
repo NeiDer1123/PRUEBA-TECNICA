@@ -1,25 +1,22 @@
 const { Router } = require("express");
+const {
+  getAllProfessor,
+  getProfessorById,
+  createProfessor,
+  deleteProfessor,
+  updateProfessor,
+} = require("../handlers/professor.handler");
 
 const professorRouter = Router();
 
-professorRouter.get("/", (req, res) => {
-  res.send("Rertornando la lista de profesores");
-});
+professorRouter.get("/", getAllProfessor);
 
-professorRouter.get("/:id", (req, res) => {
-  res.send("Rertornando un solo profesor");
-});
+professorRouter.get("/:id", getProfessorById);
 
-professorRouter.post("/", (req, res) => {
-  res.send("Creando un profesor");
-});
+professorRouter.post("/", createProfessor);
 
-professorRouter.delete("/", (req, res) => {
-  res.send("Eliminar un profesor");
-});
+professorRouter.delete("/:id", deleteProfessor);
 
-professorRouter.put("/", (req, res) => {
-  res.send("Actualizando un profesor");
-});
+professorRouter.put("/:id", updateProfessor);
 
 module.exports = professorRouter;
