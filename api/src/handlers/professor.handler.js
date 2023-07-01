@@ -1,4 +1,4 @@
-const { Professor } = require("../db");
+const { Professor, Student } = require("../db");
 
 const getAllProfessor = async (req, res) => {
   try {
@@ -38,8 +38,12 @@ const createProfessor = async (req, res) => {
   try {
     // Obtener los datos del cuerpo de la solicitud
     const { identification, name, lastName, age, address, phone } = req.body;
-    console.log(req.body)
 
+    // Validar si hay un estudiante con la misma identificacion
+    const student = await Student.findByPk(identification)
+
+    if(student) throw new Error("Ya existe un Estudiante con esa identificacion");
+    
     // Crear un nuevo profesor en la base de datos
     const professor = await Professor.create({
       identification,
