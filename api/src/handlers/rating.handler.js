@@ -39,10 +39,10 @@ const getRatingById = async (req, res) => {
 const createRating = async (req, res) => {
   try {
     // Obtener los datos del cuerpo de la solicitud
-    const { academicYear, rating } = req.body;
+    const { academicYear, rating, studentId, subjectId } = req.body;
 
     // Crear una nueva calificación en la base de datos
-    const newRating = await Rating.create({ academicYear, rating });
+    const newRating = await Rating.create({ academicYear, rating, studentId, subjectId });
 
     // Devolver la calificación creada
     res.status(201).json(newRating);
@@ -71,7 +71,7 @@ const deleteRating = async (req, res) => {
     res.status(200).json({ message: "Calificación eliminada correctamente" });
   } catch (error) {
     // Manejar el error en caso de que ocurra
-    res.status(500).json({ error: "Error al eliminar la calificación" });
+    res.status(500).json({ error: error.message });
   }
 };
 
