@@ -1,11 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validateForm from "./validate";
 import style from "../Form.module.css";
+import axios from "axios";
 
 export default function FormSubject() {
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values, { resetForm }) => {
+    await axios.post("http://localhost:3001/subject", values);
     alert("curso creado");
+    resetForm();
   };
 
   return (

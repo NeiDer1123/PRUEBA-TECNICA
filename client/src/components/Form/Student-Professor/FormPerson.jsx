@@ -6,10 +6,8 @@ import { useLocation } from "react-router-dom";
 
 export default function FormPerson() {
   const location = useLocation();
-  console.log(location)
 
   const handleSubmit = async (values, { resetForm }) => {
-    console.log(values)
     if(location.pathname === "/student"){
       await axios.post("http://localhost:3001/student", values)
     } else {
