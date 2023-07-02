@@ -1,4 +1,4 @@
-import { GET_STUDENTS } from "./actions-types"
+import { GET_STUDENTS, GET_TEACHERS } from "./actions-types"
 import axios from "axios"
 
 const getStudets = () => {
@@ -13,6 +13,19 @@ const getStudets = () => {
     }
 }
 
+const getTeachers = () => {
+    return async function (dispatch){
+        const apiData = await axios.get("http://localhost:3001/professor")
+        const teachers = apiData.data
+        console.log(teachers)
+        dispatch({
+            type: GET_TEACHERS,
+            payload: teachers
+        })
+    }
+}
+
 export {
-    getStudets
+    getStudets,
+    getTeachers
 }

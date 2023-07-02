@@ -1,4 +1,4 @@
-import FormPerson from "../../components/Form/Student-Professor/FormPerson";
+// import FormPerson from "../../components/Form/Student-Professor/FormPerson";
 import TableStudents from "../../components/Tables/TableStudents";
 
 export default function Student() {
