@@ -4,11 +4,15 @@ import style from "../Form.module.css";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch } from "react-redux";
+import { getSubjects } from "../../../redux/actions";
 
 export default function FormSubject({ show, handleClose }) {
+  const dispatch = useDispatch()
+
   const handleSubmit = async (values, { resetForm }) => {
     await axios.post("http://localhost:3001/subject", values);
-    alert("curso creado");
+    dispatch(getSubjects())
     resetForm();
   };
 

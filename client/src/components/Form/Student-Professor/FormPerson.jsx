@@ -5,15 +5,20 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch } from "react-redux";
+import { getStudets, getTeachers } from "../../../redux/actions";
 
 export default function FormPerson({ show, handleClose }) {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (values, { resetForm }) => {
     if (location.pathname === "/student") {
       await axios.post("http://localhost:3001/student", values);
+      dispatch(getStudets())
     } else {
       await axios.post("http://localhost:3001/professor", values);
+      dispatch(getTeachers())
     }
     resetForm();
   };
@@ -144,8 +149,5 @@ export default function FormPerson({ show, handleClose }) {
         </Button> */}
       </Modal.Footer>
     </Modal>
-    // <div>
-
-    // </div>
   );
 }
