@@ -1,3 +1,18 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getExample } from "../../redux/actions";
+
 export default function Home() {
-  return <h1>ESTA ES LA VISTA HOME</h1>;
+
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(getExample())
+  },[dispatch])
+
+  return (
+    <div>
+      ESTOY EN HOME
+    </div>
+  );
 }
