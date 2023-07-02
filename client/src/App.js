@@ -1,4 +1,4 @@
-import { Home, FormCreate } from "./views";
+import { Home, Student, Professor, Subject} from "./views";
 import { Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 
@@ -7,8 +7,9 @@ function App() {
     <div>
       <NavBar />
       <Route exact path="/" render={() => <Home />} />
-
-      <Route path="/create" render={() => <FormCreate />} />
+      <Route exact path="/student" render={() => <Student />} />
+      <Route exact path="/professor" render={() => <Professor />} />
+      <Route exact path="/subject" render={() => <Subject />} />
     </div>
   );
 }

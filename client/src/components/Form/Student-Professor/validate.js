@@ -31,6 +31,10 @@ const validateForm = (values) => {
       errors.phone = "El teléfono solo puede contener números";
     }
 
+    if (!values.subject) {
+      errors.subject = "El campo de materia no puede estar vacío";
+    }
+
     return errors;
   };
 

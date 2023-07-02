@@ -5,10 +5,16 @@ export default function NavBar() {
   return (
     <nav className={styles.nav}>
       <NavLink exact to="/" activeClassName={styles.active}>
-        Home
+        report
       </NavLink>
-      <NavLink to="/create" activeClassName={styles.active}>
-        Form
+      <NavLink to="/student" activeClassName={styles.active}>
+        Create Student
+      </NavLink>
+      <NavLink to="/professor" activeClassName={styles.active}>
+        Create Professor
+      </NavLink>
+      <NavLink to="/subject" activeClassName={styles.active}>
+        Create Subject
       </NavLink>
     </nav>
   );

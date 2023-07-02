@@ -1,4 +1,6 @@
 import Home from "./Home/Home";
-import FormCreate from "./Form/Form";
+import Student from "./Student/Student";
+import Professor from "./Professor/Professor";
+import Subject from "./Subject/Subject";
 
-export { Home, FormCreate };
+export { Home, Student, Professor, Subject};
