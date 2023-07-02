@@ -1,3 +1,3 @@
-const GET_EXAMPLE = "GET_EXAMPLE";
+const GET_STUDENTS = "GET_STUDENTS";
 
-export { GET_EXAMPLE };
+export { GET_STUDENTS };

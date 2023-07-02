@@ -1,18 +1,18 @@
-import { GET_EXAMPLE } from "./actions-types"
+import { GET_STUDENTS } from "./actions-types"
 import axios from "axios"
 
-const getExample = () => {
+const getStudets = () => {
     return async function (dispatch){
-        const apiData = await axios.get("http://localhost:3001/professor")
-        const example = apiData.data
-        console.log(example)
+        const apiData = await axios.get("http://localhost:3001/student")
+        const students = apiData.data
+        console.log(students)
         dispatch({
-            type: GET_EXAMPLE,
-            payload: example
+            type: GET_STUDENTS,
+            payload: students
         })
     }
 }
 
 export {
-    getExample
+    getStudets
 }

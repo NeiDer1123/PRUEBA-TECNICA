@@ -1,13 +1,13 @@
-import { GET_EXAMPLE } from "./actions-types";
+import { GET_STUDENTS } from "./actions-types";
 
 const initialState = {
-  example: [],
+  students: [],
 };
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_EXAMPLE:
-      return { ...state, example: action.payload };
+    case GET_STUDENTS:
+      return { ...state, students: action.payload };
 
     default:
       return { ...state };
