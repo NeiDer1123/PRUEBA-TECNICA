@@ -1,12 +1,21 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validateForm from "./validate";
 import style from "../Form.module.css";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 export default function FormPerson() {
+  const location = useLocation();
+  console.log(location)
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    alert("usuario creado")
+  const handleSubmit = async (values, { resetForm }) => {
+    console.log(values)
+    if(location.pathname === "/student"){
+      await axios.post("http://localhost:3001/student", values)
+    } else {
+      await axios.post("http://localhost:3001/professor", values)
+    }
+    resetForm();
   };
 
   return (
@@ -25,7 +34,7 @@ export default function FormPerson() {
         validate={validateForm}
       >
         {({ errors }) => (
-          <Form>
+          <Form className={style.form}>
             <div className={style.formGroup}>
               <label htmlFor="identification" className={style.label}>
                 Identificación:

@@ -1,0 +1,10 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
