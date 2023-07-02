@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validateForm from "./validate";
-import style from "./FormPerson.module.css";
+import style from "../Form.module.css";
 
 export default function FormPerson() {
 

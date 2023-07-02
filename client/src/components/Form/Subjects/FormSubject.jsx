@@ -1,11 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validateForm from "./validate";
-import style from "./FormPerson.module.css";
+import style from "../Form.module.css";
 
-export default function FormPerson() {
+export default function FormSubject() {
   const handleSubmit = (values) => {
     console.log(values);
-    alert("usuario creado");
+    alert("curso creado");
   };
 
   return (
