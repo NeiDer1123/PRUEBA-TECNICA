@@ -1,12 +1,18 @@
-// import FormPerson from "../../components/Form/Student-Professor/FormPerson";
+import FormPerson from "../../components/Form/Student-Professor/FormPerson";
 import TableTeachers from "../../components/Tables/TableTeachers";
+import { useState } from "react";
 
 export default function Professor() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div>
-      <h1>CREAR PROFESOR</h1>
-      {/* <FormPerson /> */}
-      <TableTeachers/>
+      <button onClick={handleShow}>CREAR PROFESOR</button>
+      <TableTeachers />
+      <FormPerson show={show} handleClose={handleClose} />
     </div>
   );
 }
