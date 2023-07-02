@@ -1,8 +1,9 @@
-import { GET_STUDENTS, GET_TEACHERS } from "./actions-types";
+import { GET_STUDENTS, GET_SUBJECTS, GET_TEACHERS } from "./actions-types";
 
 const initialState = {
   students: [],
-  teachers: []
+  teachers: [],
+  subjects: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -12,6 +13,9 @@ export default function rootReducer(state = initialState, action) {
 
     case GET_TEACHERS:
       return { ...state, teachers: action.payload };
+
+    case GET_SUBJECTS:
+      return {...state, subjects: action.payload }
 
     default:
       return { ...state };
