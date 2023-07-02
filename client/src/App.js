@@ -1,4 +1,4 @@
-import { Home, Form } from "./views";
+import { Home, FormCreate } from "./views";
 import { Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 
@@ -8,7 +8,7 @@ function App() {
       <NavBar />
       <Route exact path="/" render={() => <Home />} />
 
-      <Route path="/create" render={() => <Form />} />
+      <Route path="/create" render={() => <FormCreate />} />
     </div>
   );
 }
