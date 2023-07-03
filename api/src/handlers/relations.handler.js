@@ -1,41 +1,42 @@
 const { Student, Rating, Subject, Professor } = require("../db");
 
-const getStudentRatingSubjectAndProfessor = async (req, res) => {
+const getRatingSubjectProfessorAndStudent = async (req, res) => {
   try {
-    const { studentId } = req.params;
+    // const { studentId } = req.params;
+    // res.send("Estoy aca")
 
-    const student = await Student.findByPk(studentId, {
+    const raitings = await Rating.findAll({
       include: [
         {
-          model: Rating,
-          attributes: ["academicYear", "rating"],
+          model: Subject,
+          attributes: ["id", "name"],
           include: [
             {
-              model: Subject,
-              attributes: ["name"],
-              include: {
-                model: Professor,
-                attributes: ["name", "lastName"],
-              },
+              model: Professor,
+              attributes: ["identification","name", "lastName"],
             },
           ],
         },
+        {
+          model: Student,
+          attributes: ["identification","name", "lastName"],
+        }
       ],
     });
 
-    if (!student) {
+    if (!raitings) {
       return res.status(404).json({ error: "Estudiante no encontrado" });
     }
 
-    res.json(student);
+    res.json(raitings);
   } catch (error) {
     console.error(error);
     res
       .status(500)
-      .json({ error: "Error al obtener la información del estudiante" });
+      .json({ error: error.message });
   }
 };
 
 module.exports = {
-  getStudentRatingSubjectAndProfessor,
+  getRatingSubjectProfessorAndStudent,
 };

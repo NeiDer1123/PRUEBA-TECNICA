@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getStudentRatingSubjectAndProfessor } = require("../handlers/relations.handler")
+const { getRatingSubjectProfessorAndStudent } = require("../handlers/relations.handler")
 const {
   getAllStudent,
   getStudentById,
@@ -20,6 +20,5 @@ studentRouter.delete("/:id", deleteStudent);
 
 studentRouter.put("/:id", updateStudent);
 
-studentRouter.get("/:studentId/report", getStudentRatingSubjectAndProfessor)
 
 module.exports = studentRouter;
