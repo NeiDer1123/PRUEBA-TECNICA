@@ -4,13 +4,20 @@ import style from "./Tables.module.css"
 import axios from "axios";
 import { useEffect } from "react";
 
-export default function TableSubjects() {
+export default function TableSubjects({handleShow,setIsUpdate, setIdSubject}) {
   const dispatch = useDispatch();
   const subjects = useSelector((state) => state.subjects);
 
   useEffect(() => {
     dispatch(getSubjects());
   }, [dispatch]);
+
+  const handleClick = (e) => {
+    const id = e.target.id
+    handleShow();
+    setIsUpdate(true);
+    setIdSubject(id);
+  }
 
   const deleteSubject = async(e) =>{
     const id = e.target.id
@@ -36,7 +43,7 @@ export default function TableSubjects() {
                 <td>{e.name}</td>
                 <td>
                   <button className="btn btn-danger" id={e.id} onClick={(e) => deleteSubject(e)}>Delete</button>
-                  <button className="btn btn-primary" id={e.identification}>Edit</button>
+                  <button className="btn btn-primary" id={e.id} onClick={handleClick}>Edit</button>
                 </td>
               </tr>
             );

@@ -1,10 +1,9 @@
-const validateForm = (values) => {
+const validateForm = (dataSubject) => {
   const errors = {};
-
-  if (!values.name) {
-    errors.name = "El campo de nombre no puede estar vacío";
-  } else if (values.name.length < 2) {
-    errors.name = "El nombre debe tener al menos 2 caracteres";
+  if (!dataSubject.name) {
+    errors.name = "The name field cannot be empty";
+  } else if (dataSubject.name.length < 2) {
+    errors.name = "The name must have at least 2 characters";
   }
 
   return errors;
