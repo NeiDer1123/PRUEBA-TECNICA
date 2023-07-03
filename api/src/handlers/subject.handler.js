@@ -79,7 +79,7 @@ const updateSubject = async (req, res) => {
     const { id } = req.params;
 
     // Obtener los nuevos datos del cuerpo de la solicitud
-    const { name } = req.body;
+    const { name, professorId } = req.body;
 
     // Verificar si la materia existe
     const existingSubject = await Subject.findByPk(id);
@@ -91,6 +91,7 @@ const updateSubject = async (req, res) => {
     await Subject.update(
       {
         name,
+        professorId
       },
       { where: { id } }
     );

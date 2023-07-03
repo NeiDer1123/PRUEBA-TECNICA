@@ -1,13 +1,29 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getTeachers } from "../../redux/actions";
+import { getSubjects, getTeachers } from "../../redux/actions";
 import style from "./Tables.module.css";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import AssignSubject from "../Modals/AssignSubject";
 
 export default function TableTeachers() {
-  const dispatch = useDispatch()
+  const [show, setShow] = useState(false);
+  const [professorId, setProfessorId] = useState()
+
+  const handleClose = () => setShow(false);
+
+  const handleShow = (e) => {
+    setShow(true)
+    setProfessorId(e.target.id)
+  };
+
+  const dispatch = useDispatch();
 
   const teachers = useSelector((state) => state.teachers);
-  console.log(teachers);
+
+  useEffect(() => {
+    dispatch(getTeachers());
+    dispatch(getSubjects());
+  }, [dispatch]);
 
   const deleteProfessor = async (e) => {
     const id = e.target.id;
@@ -40,17 +56,28 @@ export default function TableTeachers() {
                 <td>{e.address}</td>
                 <td>{e.phone}</td>
                 <td>
-                  <button className="btn btn-danger" id={e.identification} onClick={(e) => deleteProfessor(e)}>Delete</button>
-                  <button className="btn btn-primary" id={e.identification}>Edit</button>
+                  <button
+                    className="btn btn-danger"
+                    id={e.identification}
+                    onClick={(e) => deleteProfessor(e)}
+                  >
+                    Delete
+                  </button>
+                  <button className="btn btn-primary" id={e.identification}>
+                    Edit
+                  </button>
                 </td>
                 <td>
-                  <button className="btn btn-info" id={e.identification}>Assign Subject</button>
+                  <button className="btn btn-info" id={e.identification} onClick={(e)=> handleShow(e)}>
+                    Assign Subject
+                  </button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      <AssignSubject show={show} handleClose={handleClose} professorId={professorId}/>
     </div>
   );
 }

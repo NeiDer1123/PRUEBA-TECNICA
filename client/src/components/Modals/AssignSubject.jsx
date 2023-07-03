@@ -1,65 +1,57 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import validateForm from "./validate";
-import style from "../Form.module.css";
 import axios from "axios";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useDispatch } from "react-redux";
-import { getSubjects } from "../../../redux/actions";
+import { useSelector } from "react-redux";
 
-export default function FormSubject({ show, handleClose }) {
-  const dispatch = useDispatch()
+export default function AssignSubject({ show, handleClose, professorId }) {
+  const [subjectSelected, setSubjectSelected] = useState("");
+  const subjects = useSelector((state) => state.subjects);
 
-  const handleSubmit = async (values, { resetForm }) => {
-    await axios.post("http://localhost:3001/subject", values);
-    dispatch(getSubjects())
-    resetForm();
+  const teacherWhitoutSubject = subjects.filter((e)=>{
+    return e.professorId === null
+  })
+
+  console.log(teacherWhitoutSubject)
+
+  const handleOptionChange = (e) => {
+    setSubjectSelected(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    const body = {
+      professorId: professorId,
+    };
+    await axios.put(`http://localhost:3001/subject/${subjectSelected}`, body);
   };
 
   return (
     <div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Subjects without a professor</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Formik
-            initialValues={{
-              name: "",
-            }}
-            onSubmit={handleSubmit}
-            validate={validateForm}
+          <select
+            className="form-select"
+            aria-label="Choose the subject"
+            value={subjectSelected}
+            onChange={handleOptionChange}
           >
-            {({ errors }) => (
-              <Form>
-                <div className={style.formGroup}>
-                  <label htmlFor="name" className={style.label}>
-                    Nombre:
-                  </label>
-                  <Field className={style.input} name="name" type="text" />
-                  <ErrorMessage
-                    name="name"
-                    component="div"
-                    className={style.error}
-                  />
-                </div>
-
-                <div className={style.buttonContainer}>
-                  <button type="submit" className={style.submitButton}>
-                    Crear
-                  </button>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                </div>
-              </Form>
-            )}
-          </Formik>
+            <option value="">Open this select menu</option>
+            {teacherWhitoutSubject.map((e) => {
+              return (
+                <option key={e.id} value={e.id}>
+                  {e.name}
+                </option>
+              );
+            })}
+          </select>
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button variant="primary" onClick={handleClose}>
-          Save Changes
-        </Button> */}
+          <Button variant="primary" onClick={handleSubmit}>
+            Assign
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
