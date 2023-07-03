@@ -5,7 +5,6 @@ const getStudets = () => {
   return async function (dispatch) {
     const apiData = await axios.get("http://localhost:3001/student");
     const students = apiData.data;
-    console.log(students);
     dispatch({
       type: GET_STUDENTS,
       payload: students,
@@ -17,7 +16,6 @@ const getTeachers = () => {
   return async function (dispatch) {
     const apiData = await axios.get("http://localhost:3001/professor");
     const teachers = apiData.data;
-    console.log(teachers);
     dispatch({
       type: GET_TEACHERS,
       payload: teachers,
@@ -29,12 +27,12 @@ const getSubjects = () => {
   return async function (dispatch) {
     const apiData = await axios.get("http://localhost:3001/subject");
     const subjects = apiData.data;
-    console.log(subjects);
     dispatch({
       type: GET_SUBJECTS,
       payload: subjects,
     });
   };
 };
+
 
 export { getStudets, getTeachers, getSubjects };

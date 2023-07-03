@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudets } from "../../redux/actions";
 import style from "./Tables.module.css"
+import axios from "axios";
 
 export default function TableStudents() {
   const dispatch = useDispatch();
@@ -10,6 +11,12 @@ export default function TableStudents() {
   useEffect(() => {
     dispatch(getStudets());
   }, [dispatch]);
+
+  const deleteStudent = async(e) =>{
+    const id = e.target.id
+    await axios.delete(`http://localhost:3001/student/${id}`)
+    dispatch(getStudets());
+  }
 
   return (
     <div className={style.container}>
@@ -36,8 +43,11 @@ export default function TableStudents() {
                 <td>{e.address}</td>
                 <td>{e.phone}</td>
                 <td>
-                  <button className="btn btn-danger">Delete</button>
-                  <button className="btn btn-primary">Edit</button>
+                  <button className="btn btn-danger" id={e.identification} onClick={(e) => deleteStudent(e)}>Delete</button>
+                  <button className="btn btn-primary" id={e.identification}>Edit</button>
+                </td>
+                <td>
+                  <button className="btn btn-info" id={e.identification}>Assign Ratings</button>
                 </td>
               </tr>
             );

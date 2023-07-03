@@ -9,7 +9,7 @@ export default function Student() {
   const handleShow = () => setShow(true);
   return (
     <div>
-      <button onClick={handleShow}>CREAR ESTUDIANTE</button>
+      <button className="btn btn-success" onClick={handleShow}>CREAR ESTUDIANTE</button>
       {/* <FormPerson /> */}
       <TableStudents/>
       <FormPerson show={show} handleClose={handleClose} />
