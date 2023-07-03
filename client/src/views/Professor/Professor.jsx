@@ -10,7 +10,7 @@ export default function Professor() {
 
   return (
     <div>
-      <button onClick={handleShow}>CREAR PROFESOR</button>
+      <button className="btn btn-success" onClick={handleShow}>CREAR PROFESOR</button>
       <TableTeachers />
       <FormPerson show={show} handleClose={handleClose} />
     </div>

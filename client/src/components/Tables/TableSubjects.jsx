@@ -2,15 +2,21 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../../redux/actions";
 import style from "./Tables.module.css"
+import axios from "axios";
 
 export default function TableSubjects() {
   const dispatch = useDispatch();
   const subjects = useSelector((state) => state.subjects);
-  console.log(subjects)
 
   useEffect(() => {
     dispatch(getSubjects());
   }, [dispatch]);
+
+  const deleteSubject = async(e) =>{
+    const id = e.target.id
+    await axios.delete(`http://localhost:3001/subject/${id}`)
+    dispatch(getSubjects());
+  }
 
   return (
     <div className={style.container}>
@@ -29,8 +35,8 @@ export default function TableSubjects() {
                 <td>{e.id}</td>
                 <td>{e.name}</td>
                 <td>
-                  <button className="btn btn-danger">Delete</button>
-                  <button className="btn btn-primary">Edit</button>
+                  <button className="btn btn-danger" id={e.id} onClick={(e) => deleteSubject(e)}>Delete</button>
+                  <button className="btn btn-primary" id={e.identification}>Edit</button>
                 </td>
               </tr>
             );
