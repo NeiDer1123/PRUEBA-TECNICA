@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../../redux/actions";
 import style from "./Tables.module.css"
@@ -7,10 +6,6 @@ import axios from "axios";
 export default function TableSubjects() {
   const dispatch = useDispatch();
   const subjects = useSelector((state) => state.subjects);
-
-  useEffect(() => {
-    dispatch(getSubjects());
-  }, [dispatch]);
 
   const deleteSubject = async(e) =>{
     const id = e.target.id

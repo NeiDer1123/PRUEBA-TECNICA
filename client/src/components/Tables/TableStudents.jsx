@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudets } from "../../redux/actions";
 import style from "./Tables.module.css"
@@ -7,10 +6,6 @@ import axios from "axios";
 export default function TableStudents() {
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
-
-  useEffect(() => {
-    dispatch(getStudets());
-  }, [dispatch]);
 
   const deleteStudent = async(e) =>{
     const id = e.target.id

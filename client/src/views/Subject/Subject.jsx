@@ -9,7 +9,7 @@ export default function Subject() {
   const handleShow = () => setShow(true);
   return (
     <div>
-      <button onClick={handleShow}>CREAR ASIGNATURA</button>
+      <button className="btn btn-success" onClick={handleShow}>CREAR ASIGNATURA</button>
       <TableSubjects />
       <FormSubject show={show} handleClose={handleClose} />
     </div>

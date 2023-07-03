@@ -1,17 +1,13 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getTeachers } from "../../redux/actions";
 import style from "./Tables.module.css";
 import axios from "axios";
 
 export default function TableTeachers() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+
   const teachers = useSelector((state) => state.teachers);
   console.log(teachers);
-
-  useEffect(() => {
-    dispatch(getTeachers());
-  }, [dispatch]);
 
   const deleteProfessor = async (e) => {
     const id = e.target.id;
