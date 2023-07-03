@@ -116,6 +116,7 @@ export default function FormPerson({
             </label>
             <input
               className={style.input}
+              id="identification"
               name="identification"
               type="number"
               value={dataPerson.identification}
@@ -139,6 +140,7 @@ export default function FormPerson({
             </label>
             <input
               className={style.input}
+              id="name"
               name="name"
               type="text"
               value={dataPerson.name}
@@ -154,6 +156,7 @@ export default function FormPerson({
             </label>
             <input
               className={style.input}
+              id="lastName"
               name="lastName"
               type="text"
               value={dataPerson.lastName}
@@ -173,6 +176,7 @@ export default function FormPerson({
             </label>
             <input
               className={style.input}
+              id="age"
               name="age"
               type="number"
               value={dataPerson.age}
@@ -188,6 +192,7 @@ export default function FormPerson({
             </label>
             <input
               className={style.input}
+              id="address"
               name="address"
               type="text"
               value={dataPerson.address}
@@ -207,6 +212,7 @@ export default function FormPerson({
             </label>
             <input
               className={style.input}
+              id="phone"
               name="phone"
               type="tel"
               value={dataPerson.phone}
