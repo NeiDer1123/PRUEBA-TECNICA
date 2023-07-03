@@ -12,10 +12,6 @@ export default function FormSubject({ show, handleClose, isUpdate, idSubject }) 
   const [errors, setErrors] = useState({ name: "" });
 
   useEffect(()=>{
-    // Cuando sea "true" muestro los valores con los que se creo:
-    isUpdate && setDataSubject({ name: "matematicas" })
-
-    // Al desmontar se setea en su valor predeterminado:
     return () => {
       setDataSubject({name: ""});
     };

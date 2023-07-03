@@ -1,9 +1,15 @@
-import { GET_STUDENTS, GET_SUBJECTS, GET_TEACHERS } from "./actions-types";
+import {
+  GET_PERSON,
+  GET_STUDENTS,
+  GET_SUBJECTS,
+  GET_TEACHERS,
+} from "./actions-types";
 
 const initialState = {
   students: [],
   teachers: [],
-  subjects: []
+  subjects: [],
+  person: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -15,7 +21,10 @@ export default function rootReducer(state = initialState, action) {
       return { ...state, teachers: action.payload };
 
     case GET_SUBJECTS:
-      return {...state, subjects: action.payload }
+      return { ...state, subjects: action.payload };
+
+    case GET_PERSON:
+      return { ...state, person: action.payload };
 
     default:
       return { ...state };

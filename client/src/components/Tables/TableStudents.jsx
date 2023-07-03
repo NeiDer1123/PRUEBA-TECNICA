@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getStudets, getSubjects } from "../../redux/actions";
+import { getPerson, getStudets, getSubjects } from "../../redux/actions";
 import style from "./Tables.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AssingRatings from "../Modals/AssignRatings";
+import { useLocation } from "react-router-dom";
 
-export default function TableStudents() {
+export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate}) {
   const [show, setShow] = useState(false);
   const [studentId, setStudentId] = useState();
+  const location = useLocation();
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
 
@@ -17,6 +19,15 @@ export default function TableStudents() {
     setShow(true);
     setStudentId(e.target.id);
   };
+
+  const handleClick = (e) => {
+    const id = e.target.id
+    handleShowForm();
+    setIsUpdate(true);
+    setIdToUpdate(id);
+    // Pido los datos de la persona.
+    dispatch(getPerson(id, location.pathname));
+  }
 
   useEffect(() => {
     dispatch(getStudets());
@@ -61,7 +72,7 @@ export default function TableStudents() {
                   >
                     Delete
                   </button>
-                  <button className="btn btn-primary" id={e.identification}>
+                  <button className="btn btn-primary" id={e.identification} onClick={(e)=> handleClick(e)}>
                     Edit
                   </button>
                 </td>

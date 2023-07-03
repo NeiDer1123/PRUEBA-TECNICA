@@ -1,4 +1,4 @@
-import { GET_STUDENTS, GET_TEACHERS, GET_SUBJECTS } from "./actions-types";
+import { GET_STUDENTS, GET_TEACHERS, GET_SUBJECTS, GET_PERSON } from "./actions-types";
 import axios from "axios";
 
 const getStudets = () => {
@@ -34,5 +34,25 @@ const getSubjects = () => {
   };
 };
 
+const getPerson = (id, location) => {
+  return async function (dispatch) {
+    if (location === "/student") {
+      const apiData = await axios.get(`http://localhost:3001/student/${id}`);
+      const student = apiData.data;
+      console.log(student)
+      dispatch({
+        type: GET_PERSON,
+        payload: student,
+      });
+    } else {
+      const apiData = await axios.get(`http://localhost:3001/professor/${id}`);
+      const professor = apiData.data;
+      dispatch({
+        type: GET_PERSON,
+        payload: professor,
+      });
+    }
+  };
+};
 
-export { getStudets, getTeachers, getSubjects };
+export { getStudets, getTeachers, getSubjects, getPerson };

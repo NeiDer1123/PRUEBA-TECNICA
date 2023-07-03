@@ -1,38 +1,34 @@
-const validateForm = (values) => {
+const validateForm = (dataPerson) => {
     const errors = {};
 
-    if (!values.identification) {
+    if (!dataPerson.identification) {
       errors.identification = "El campo de identificación no puede estar vacío";
     }
 
-    if (!values.name) {
+    if (!dataPerson.name) {
       errors.name = "El campo de nombre no puede estar vacío";
-    } else if (values.name.length < 2) {
+    } else if (dataPerson.name.length < 2) {
       errors.name = "El nombre debe tener al menos 2 caracteres";
     }
 
-    if (!values.lastName) {
+    if (!dataPerson.lastName) {
       errors.lastName = "El campo de apellido no puede estar vacío";
-    } else if (values.lastName.length < 2) {
+    } else if (dataPerson.lastName.length < 2) {
       errors.lastName = "El apellido debe tener al menos 2 caracteres";
     }
 
-    if (!values.age) {
+    if (!dataPerson.age) {
       errors.age = "El campo de edad no puede estar vacío";
     }
 
-    if (!values.address) {
+    if (!dataPerson.address) {
       errors.address = "El campo de dirección no puede estar vacío";
     }
 
-    if (!values.phone) {
+    if (!dataPerson.phone) {
       errors.phone = "El campo de teléfono no puede estar vacío";
-    } else if (!/^\d+$/.test(values.phone)) {
+    } else if (!/^\d+$/.test(dataPerson.phone)) {
       errors.phone = "El teléfono solo puede contener números";
-    }
-
-    if (!values.subject) {
-      errors.subject = "El campo de materia no puede estar vacío";
     }
 
     return errors;
