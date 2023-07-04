@@ -34,4 +34,17 @@ const validateForm = (dataPerson) => {
     return errors;
   };
 
-  export default validateForm
+  // Valido si hay algun campo vacio:
+  const verifyData = (dataPerson) => {
+    for (let key in dataPerson) {
+      if (dataPerson[key] === "") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  export {
+    validateForm,
+    verifyData
+  } 

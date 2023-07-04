@@ -1,4 +1,4 @@
-import validateForm from "./validate";
+import {validateForm, verifyData} from "./validate";
 import style from "../Form.module.css";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -39,21 +39,20 @@ export default function FormPerson({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setDataPerson((prevState) => ({
-      ...prevState,
+    setDataPerson({
+      ...dataPerson,
       [name]: value,
-    }));
-    setErrors((prevErrors) => ({
-      ...prevErrors,
+    });
+    setErrors({
+      ...errors,
       [name]: validateForm({
-        ...dataPerson,
+        ...errors,
         [name]: value,
-      })[name],
-    }));
+      })[name]
+    });
   };
 
   const resetValues = () => {
-    console.log("reseteo los valores");
     setDataPerson({
       identification: "",
       name: "",
@@ -74,7 +73,10 @@ export default function FormPerson({
 
   const createPerson = async (e) => {
     e.preventDefault();
-    console.log(dataPerson);
+
+    // Verifico que no hayan campos vacios:
+    if(verifyData(dataPerson)) return alert("There cannot be any empty fields.")
+
     if (location.pathname === "/student") {
       await axios.post("http://localhost:3001/student", dataPerson);
       resetValues();
@@ -88,10 +90,12 @@ export default function FormPerson({
 
   const updatePerson = async (e) => {
     e.preventDefault();
+
+    // Filtro solo los valores que tienen informacion:
     const body = Object.fromEntries(
       Object.entries(dataPerson).filter(([key, value]) => value !== "")
     );
-    console.log(body);
+
     if (location.pathname === "/student") {
       await axios.put(`http://localhost:3001/student/${idToUpdate}`, body);
       resetValues();
@@ -120,13 +124,7 @@ export default function FormPerson({
               name="identification"
               type="number"
               value={dataPerson.identification}
-              placeholder={
-                isUpdate
-                  ? person.identification
-                    ? person.identification
-                    : ""
-                  : ""
-              }
+              placeholder={ isUpdate ? person.identification ? person.identification : "" : "" }
               onChange={(e) => handleInputChange(e)}
             />
             {errors.identification && (

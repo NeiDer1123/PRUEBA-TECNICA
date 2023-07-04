@@ -67,10 +67,10 @@ export default function FormSubject({ show, handleClose, isUpdate, idSubject }) 
                 onChange={(e) => handleInputChange(e)}
                 value={dataSubject.name}
               />
-            </div>
             {errors.name && (
               <span className={style.error}>{errors.name}</span>
             )}
+            </div>
             <div className={style.buttonContainer}>
               {!isUpdate ? (
                 <button
