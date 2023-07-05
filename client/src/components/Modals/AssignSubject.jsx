@@ -24,7 +24,7 @@ export default function AssignSubject({ show, handleClose, professorId }) {
       professorId: professorId,
     };
     await axios.put(`http://localhost:3001/subject/${subjectSelected}`, body);
-    Swal.fire("Buen trabajo!", "Asignatura Asignada", "success");
+    Swal.fire("Buen trabajo!", "Materia Asignada", "success");
     // Actualizo el arreglo de asignaturas, para el filtrado de profesores sin asignaturas:
     dispatch(getSubjects());
   };

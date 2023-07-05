@@ -87,7 +87,7 @@ export default function FormSubject({
           <form>
             <div className={style.formGroup}>
               <label htmlFor="name" className={style.label}>
-                Name:
+                Nombre:
               </label>
               <input
                 className={style.input}
@@ -109,7 +109,7 @@ export default function FormSubject({
                   className="btn btn-primary"
                   onClick={createOrUpdateSubject}
                 >
-                  Create
+                  Crear
                 </button>
               ) : (
                 <button
@@ -117,11 +117,11 @@ export default function FormSubject({
                   className="btn btn-warning"
                   onClick={createOrUpdateSubject}
                 >
-                  Update
+                  Actualizar
                 </button>
               )}
               <button className="btn btn-secondary" onClick={handleClose}>
-                Close
+                Cerrar
               </button>
             </div>
           </form>
