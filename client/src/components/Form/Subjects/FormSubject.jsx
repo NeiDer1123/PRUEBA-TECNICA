@@ -55,10 +55,12 @@ export default function FormSubject({
       await axios.post("http://localhost:3001/subject", dataSubject);
       dispatch(getSubjects());
       setDataSubject({ name: "" });
+      return alert("Subject created")
     } else {
       await axios.put(`http://localhost:3001/subject/${idSubject}`, dataSubject);
       dispatch(getSubjects());
       setDataSubject({ name: "" });
+      return alert("Subject updated")
     }
   };
 
