@@ -1,4 +1,4 @@
-import {validateForm, verifyData} from "./validate";
+import { validateForm, verifyData } from "./validate";
 import style from "../Form.module.css";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -48,7 +48,7 @@ export default function FormPerson({
       [name]: validateForm({
         ...errors,
         [name]: value,
-      })[name]
+      })[name],
     });
   };
 
@@ -75,16 +75,19 @@ export default function FormPerson({
     e.preventDefault();
 
     // Verifico que no hayan campos vacios:
-    if(verifyData(dataPerson)) return alert("There cannot be any empty fields.")
+    if (verifyData(dataPerson))
+      return alert("No puede haber campos vacios.");
 
     if (location.pathname === "/student") {
       await axios.post("http://localhost:3001/student", dataPerson);
       resetValues();
       dispatch(getStudets());
+      return alert("Estudiante Creado");
     } else {
       await axios.post("http://localhost:3001/professor", dataPerson);
       resetValues();
       dispatch(getTeachers());
+      return alert("Profesor Creado");
     }
   };
 
@@ -105,6 +108,7 @@ export default function FormPerson({
       resetValues();
       dispatch(getTeachers());
     }
+    return alert("Datos actualizados correctamente");
   };
 
   return (
@@ -116,7 +120,7 @@ export default function FormPerson({
         <form className={style.form}>
           <div className={style.formGroup}>
             <label htmlFor="identification" className={style.label}>
-              Identification:
+              Identificación:
             </label>
             <input
               className={style.input}
@@ -124,7 +128,13 @@ export default function FormPerson({
               name="identification"
               type="number"
               value={dataPerson.identification}
-              placeholder={ isUpdate ? person.identification ? person.identification : "" : "" }
+              placeholder={
+                isUpdate
+                  ? person.identification
+                    ? person.identification
+                    : ""
+                  : ""
+              }
               onChange={(e) => handleInputChange(e)}
             />
             {errors.identification && (
@@ -134,7 +144,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="name" className={style.label}>
-              Name:
+              Nombre:
             </label>
             <input
               className={style.input}
@@ -150,7 +160,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="lastName" className={style.label}>
-              Last Name:
+              Apellido:
             </label>
             <input
               className={style.input}
@@ -170,7 +180,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="age" className={style.label}>
-              Age:
+              Edad:
             </label>
             <input
               className={style.input}
@@ -186,7 +196,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="address" className={style.label}>
-              Address:
+              Dirección:
             </label>
             <input
               className={style.input}
@@ -206,7 +216,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="phone" className={style.label}>
-              Phone:
+              Teléfono:
             </label>
             <input
               className={style.input}
@@ -229,7 +239,7 @@ export default function FormPerson({
                 className="btn btn-primary"
                 onClick={createPerson}
               >
-                Create
+                Crear
               </button>
             ) : (
               <button
@@ -237,11 +247,11 @@ export default function FormPerson({
                 className="btn btn-warning"
                 onClick={updatePerson}
               >
-                Update
+                Actualizar
               </button>
             )}
             <button className="btn btn-secondary" onClick={handleClose}>
-              Close
+              Cerrar
             </button>
           </div>
         </form>

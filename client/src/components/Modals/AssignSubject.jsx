@@ -34,7 +34,7 @@ export default function AssignSubject({ show, handleClose, professorId }) {
     <div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Subjects Available.</Modal.Title>
+          <Modal.Title>Asignaturas Disponibles.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <select
@@ -43,7 +43,7 @@ export default function AssignSubject({ show, handleClose, professorId }) {
             value={subjectSelected}
             onChange={handleOptionChange}
           >
-            <option value="">Subjects without a professor:</option>
+            <option value="">Asignaturas sin profesor:</option>
             {teacherWhitoutSubject.map((e) => {
               return (
                 <option key={e.id} value={e.id}>
@@ -55,7 +55,7 @@ export default function AssignSubject({ show, handleClose, professorId }) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleSubmit}>
-            Assign
+            Asignar
           </Button>
         </Modal.Footer>
       </Modal>

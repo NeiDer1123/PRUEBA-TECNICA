@@ -20,7 +20,7 @@ RatingModel(sequelize);
 const { Professor, Student, Rating, Subject } = sequelize.models;
 
 // Relación entre Professor y Subject (Uno a Uno)
-Professor.hasOne(Subject, { foreignKey: "professorId", onDelete: "CASCADE" });
+Professor.hasOne(Subject, { foreignKey: "professorId"});
 Subject.belongsTo(Professor, { foreignKey: "professorId" });
 
 // Relación entre Student y Rating (Uno a Muchos)
