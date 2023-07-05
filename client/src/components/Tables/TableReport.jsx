@@ -7,20 +7,22 @@ export default function TableReport() {
   return (
     <div className="table-responsive">
       {report.length === 0 ? (
-        <span className="text-primary">You must assign a grade to a student*</span>
+        <span className="text-primary">
+          Debes asignar una calificación a un estudiante.*
+        </span>
       ) : null}
       <table className="table table-bordered table-striped mt-3">
         <thead>
-          <tr>
-            <th scope="col">Academic Year</th>
-            <th scope="col">Student ID</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">Subject ID</th>
-            <th scope="col">Subject Name</th>
-            <th scope="col">Professor ID</th>
-            <th scope="col">Professor Name</th>
-            <th scope="col">FINAL RATING</th>
-            <th scope="col">Approved</th>
+          <tr className="text-center">
+            <th scope="col">Año Académico</th>
+            <th scope="col">ID del Estudiante</th>
+            <th scope="col">Nombre del Estudiante</th>
+            <th scope="col">ID de la Asignatura</th>
+            <th scope="col">Nombre de la Asignatura</th>
+            <th scope="col">ID del Profesor</th>
+            <th scope="col">Nombre del Profesor</th>
+            <th scope="col">CALIFICACIÓN FINAL</th>
+            <th scope="col">Aprobado</th>
           </tr>
         </thead>
         <tbody>

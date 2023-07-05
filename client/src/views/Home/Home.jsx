@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-5">ACADEMIC INFORMATION</h1>
+      <h1 className="text-center mb-5">Información Académica</h1>
       <TableReport />
     </div>
   );

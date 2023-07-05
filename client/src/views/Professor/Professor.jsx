@@ -18,7 +18,7 @@ export default function Professor() {
     <div>
       <div className="container">
         <button className="btn btn-success my-4" onClick={handleClick}>
-          Create Teacher
+          Crear Profesor
         </button>
         <TableTeachers
           handleShowForm={handleShow}

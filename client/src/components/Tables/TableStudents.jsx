@@ -43,14 +43,14 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
     <div className="table-responsive">
       <table className="table table-bordered table-striped">
         <thead>
-          <tr>
-            <th scope="col">Identification</th>
-            <th scope="col">Name</th>
-            <th scope="col">Lastname</th>
-            <th scope="col">Age</th>
-            <th scope="col">Address</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Actions</th>
+          <tr className="text-center">
+            <th scope="col">Identificación</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -69,13 +69,13 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
                     id={e.identification}
                     onClick={(e) => deleteStudent(e)}
                   >
-                    Delete
+                    Eliminar
                   </button>
                   <button className="btn btn-primary" id={e.identification} onClick={(e)=> handleClick(e)}>
-                    Edit
+                    Editar
                   </button>
                   <button className="btn btn-info" id={e.identification} onClick={(e)=> handleShow(e)}>
-                    Assign Ratings
+                    Asignar Calificación
                   </button>
                 </td>
               </tr>

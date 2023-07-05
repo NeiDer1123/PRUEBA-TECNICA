@@ -18,7 +18,7 @@ export default function Student() {
     <div>
       <div className="container">
         <button className="btn btn-success my-4" onClick={handleClick}>
-          Create Student
+          Crear Estudiante
         </button>
         <TableStudents
           handleShowForm={handleShow}

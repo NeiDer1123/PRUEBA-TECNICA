@@ -1,20 +1,19 @@
 const validate = (rating) => {
   const currentYear = new Date().getFullYear();
-  console.log(currentYear)
+  console.log(currentYear);
   let errors = {};
   if (rating.academicYear > currentYear) {
-    errors.academicYear =
-      "A year in excess of the current year is not allowed.";
+    errors.academicYear = "No se permite un año superior al año actual.";
   }
   if (rating.academicYear < currentYear - 10) {
     errors.academicYear =
-      "The academic year must be at least 10 years in the past.";
+      "El año académico debe ser máximo de hace 10 años";
   }
   if (rating.rating > 5) {
-    errors.rating = "A rating higher than 5 is not allowed.";
+    errors.rating = "No se permite una calificación mayor a 5.";
   }
   if (rating.rating < 0) {
-    errors.rating = "No rating less than 0 is allowed.";
+    errors.rating = "No se permite una calificación menor a 0.";
   }
   return errors;
 };

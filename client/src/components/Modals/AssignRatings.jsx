@@ -56,7 +56,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
     <div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Assigns the rating</Modal.Title>
+          <Modal.Title>Asigna la calificación</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="row mb-4">
@@ -64,7 +64,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
               <input
                 type="number"
                 className="form-control"
-                placeholder="Academic Year"
+                placeholder="Año Académico"
                 aria-label="First name"
                 name="academicYear"
                 value={rating.academicYear}
@@ -76,7 +76,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
               <input
                 type="number"
                 className="form-control"
-                placeholder="Rating"
+                placeholder="Calificación"
                 aria-label="Last name"
                 name="rating"
                 value={rating.rating}
@@ -92,7 +92,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
             onChange={handleOptionChange}
           >
             <option value="" className="text-danger">
-              You must choose a subject
+            Debes elegir una asignatura:
             </option>
             {subjects.map((e) => {
               return (
