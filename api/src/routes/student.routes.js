@@ -1,16 +1,18 @@
 const { Router } = require("express");
-const { getRatingSubjectProfessorAndStudent } = require("../handlers/relations.handler")
 const {
   getAllStudent,
   getStudentById,
   createStudent,
   deleteStudent,
   updateStudent,
+  getStudentRatings
 } = require("../handlers/student.handler");
 
 const studentRouter = Router();
 
 studentRouter.get("/", getAllStudent);
+
+studentRouter.get("/:id/ratings", getStudentRatings);
 
 studentRouter.get("/:id", getStudentById);
 

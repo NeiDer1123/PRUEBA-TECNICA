@@ -1,4 +1,4 @@
-const { Student, Professor } = require("../db")
+const { Student, Professor, Rating, Subject } = require("../db");
 
 const getAllStudent = async (req, res) => {
   try {
@@ -40,10 +40,11 @@ const createStudent = async (req, res) => {
     const { identification, name, lastName, age, address, phone } = req.body;
 
     // Validar si hay un profesor con la misma identificacion
-    const professor = await Professor.findByPk(identification)
+    const professor = await Professor.findByPk(identification);
 
-    if(professor) throw new Error("Ya existe un Profesor con esa identificacion");
-    
+    if (professor)
+      throw new Error("Ya existe un Profesor con esa identificacion");
+
     // Crear un nuevo estudiante en la base de datos
     const student = await Student.create({
       identification,
@@ -120,11 +121,41 @@ const updateStudent = async (req, res) => {
   }
 };
 
+// Controlador para obtener las calificaciones de un estudiante por su ID
+// Controlador para obtener las calificaciones de un estudiante por su ID
+const getStudentRatings = async (req, res) => {
+  const studentId = req.params.id;
+
+  try {
+
+    // Obtener las calificaciones del estudiante con la asignatura correspondiente
+    const ratings = await Rating.findAll({
+      where: { studentId },
+      attributes: ["academicYear", "rating"],
+      include: {
+        model: Subject,
+        attributes: ["name"],
+      },
+    });
+
+    if (!ratings) {
+      return res.status(404).json({ error: "Estudiante no encontrado" });
+    }
+
+    res.json({ ratings });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "Error al obtener las calificaciones del estudiante" });
+  }
+};
+
 module.exports = {
   getAllStudent,
   getStudentById,
   createStudent,
   deleteStudent,
   updateStudent,
+  getStudentRatings,
 };
-

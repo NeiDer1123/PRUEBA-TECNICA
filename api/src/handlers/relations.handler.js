@@ -2,9 +2,6 @@ const { Student, Rating, Subject, Professor } = require("../db");
 
 const getRatingSubjectProfessorAndStudent = async (req, res) => {
   try {
-    // const { studentId } = req.params;
-    // res.send("Estoy aca")
-
     const raitings = await Rating.findAll({
       include: [
         {

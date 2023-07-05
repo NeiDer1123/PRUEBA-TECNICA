@@ -1,5 +1,4 @@
 const { Router } = require("express");
-// const { getRatingSubjectProfessorAndStudent } = require("../handlers/relations.handler")
 const { getRatingSubjectProfessorAndStudent } = require("../handlers/relations.handler");
 const {
   getAllRating,
