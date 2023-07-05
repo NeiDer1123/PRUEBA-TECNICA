@@ -1,4 +1,4 @@
-import { GET_STUDENTS, GET_TEACHERS, GET_SUBJECTS, GET_PERSON, GET_REPORT } from "./actions-types";
+import { GET_STUDENTS, GET_TEACHERS, GET_SUBJECTS, GET_PERSON, GET_REPORT, GET_SUBJECT } from "./actions-types";
 import axios from "axios";
 
 const getStudets = () => {
@@ -55,6 +55,18 @@ const getPerson = (id, location) => {
   };
 };
 
+const getSubject = (id) => {
+  return async function (dispatch) {
+      const response = await axios.get(`http://localhost:3001/subject/${id}`);
+      const student = response.data;
+      console.log(student)
+      dispatch({
+        type: GET_SUBJECT,
+        payload: student,
+      });
+  };
+};
+
 const getReport = () => {
   return async function (dispatch) {
     const response = await axios.get("http://localhost:3001/rating/report");
@@ -66,4 +78,4 @@ const getReport = () => {
   };
 };
 
-export { getStudets, getTeachers, getSubjects, getPerson, getReport };
+export { getStudets, getTeachers, getSubjects, getPerson, getReport, getSubject };

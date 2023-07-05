@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getSubjects } from "../../redux/actions";
+import { getSubject, getSubjects } from "../../redux/actions";
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -16,6 +16,7 @@ export default function TableSubjects({ handleShow, setIsUpdate, setIdSubject })
     handleShow();
     setIsUpdate(true);
     setIdSubject(id);
+    dispatch(getSubject(id))
   };
 
   const deleteSubject = async (e) => {

@@ -2,6 +2,7 @@ import {
   GET_PERSON,
   GET_REPORT,
   GET_STUDENTS,
+  GET_SUBJECT,
   GET_SUBJECTS,
   GET_TEACHERS,
 } from "./actions-types";
@@ -11,11 +12,12 @@ const initialState = {
   teachers: [],
   subjects: [],
   person: {},
+  subject: {},
   report: [
     {
       id: 1,
       academicYear: "2014",
-      rating: 2014,
+      rating: 2.5,
       studentId: 9687,
       subjectId: 1,
       Subject: {
@@ -50,8 +52,11 @@ function rootReducer(state = initialState, action) {
     case GET_PERSON:
       return { ...state, person: action.payload };
 
+    case GET_SUBJECT:
+      return { ...state, subject: action.payload}
+
     case GET_REPORT:
-      return { ...state };
+      return { ...state, report: action.payload };
 
     default:
       return { ...state };

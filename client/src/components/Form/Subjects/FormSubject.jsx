@@ -2,49 +2,64 @@ import validateForm from "./validate";
 import style from "../Form.module.css";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../../../redux/actions";
 import { useEffect, useState } from "react";
+import { changeString } from "../../../helpers/funtions";
 
-export default function FormSubject({ show, handleClose, isUpdate, idSubject }) {
+export default function FormSubject({
+  show,
+  handleClose,
+  isUpdate,
+  idSubject,
+}) {
   const dispatch = useDispatch();
   const [dataSubject, setDataSubject] = useState({ name: "" });
   const [errors, setErrors] = useState({ name: "" });
+  const subject = useSelector((state) => state.subject);
+  const subjects = useSelector((state) => state.subjects);
 
   useEffect(() => {
-    return () => {
-      setDataSubject({ name: "" });
-    };
+    setDataSubject({ name: "" });
   }, [isUpdate]);
 
   // Conecto mi estado con los valores del Input:
   const handleInputChange = (e) => {
     setDataSubject({
       ...dataSubject,
-      [e.target.name]: e.target.value,
+      [e.target.name]: changeString(e.target.value),
     });
     setErrors(
       validateForm({
         ...dataSubject,
-        [e.target.name]: e.target.value,
+        [e.target.name]: changeString(e.target.value),
       })
     );
   };
 
-  const createSubject = async (e) => {
-    e.preventDefault();
-    if (errors.name || !dataSubject.name) return;
-    await axios.post("http://localhost:3001/subject", dataSubject);
-    dispatch(getSubjects());
-    setDataSubject({ name: "" });
+  // Valido si el nombre NO esta repetido:
+  const validateNameSubject = (name, subjects) => {
+    return subjects.some((subject) => subject.name === name);
   };
 
-  const updateSubject = async (e) => {
+  const createOrUpdateSubject = async (e) => {
     e.preventDefault();
-    if (errors.name) return;
-    await axios.put(`http://localhost:3001/subject/${idSubject}`, dataSubject);
-    dispatch(getSubjects());
-    setDataSubject({ name: "" });
+
+    if (validateNameSubject(dataSubject.name, subjects))
+      return alert("A subject with this name already exists.");
+
+    if (errors.name || !dataSubject.name)
+      return alert("There are errors or empty data.")
+
+    if(!isUpdate){
+      await axios.post("http://localhost:3001/subject", dataSubject);
+      dispatch(getSubjects());
+      setDataSubject({ name: "" });
+    } else {
+      await axios.put(`http://localhost:3001/subject/${idSubject}`, dataSubject);
+      dispatch(getSubjects());
+      setDataSubject({ name: "" });
+    }
   };
 
   return (
@@ -64,19 +79,20 @@ export default function FormSubject({ show, handleClose, isUpdate, idSubject }) 
                 id="name"
                 name="name"
                 type="text"
+                placeholder={isUpdate ? (subject.name ? subject.name : "") : ""}
                 onChange={(e) => handleInputChange(e)}
                 value={dataSubject.name}
               />
-            {errors.name && (
-              <span className={style.error}>{errors.name}</span>
-            )}
+              {errors.name && (
+                <span className={style.error}>{errors.name}</span>
+              )}
             </div>
             <div className={style.buttonContainer}>
               {!isUpdate ? (
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  onClick={createSubject}
+                  onClick={createOrUpdateSubject}
                 >
                   Create
                 </button>
@@ -84,7 +100,7 @@ export default function FormSubject({ show, handleClose, isUpdate, idSubject }) 
                 <button
                   type="submit"
                   className="btn btn-warning"
-                  onClick={updateSubject}
+                  onClick={createOrUpdateSubject}
                 >
                   Update
                 </button>
@@ -95,119 +111,7 @@ export default function FormSubject({ show, handleClose, isUpdate, idSubject }) 
             </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          {/* <Button variant="primary" onClick={handleClose}>
-          Save Changes
-        </Button> */}
-        </Modal.Footer>
       </Modal>
     </div>
   );
 }
-
-
-// import validateForm from "./validate";
-// import style from "../Form.module.css";
-// import axios from "axios";
-// import Modal from "react-bootstrap/Modal";
-// import { useDispatch } from "react-redux";
-// import { getSubjects } from "../../../redux/actions";
-// import { useEffect, useState } from "react";
-
-// export default function FormSubject({ show, handleClose, isUpdate, idSubject }) {
-//   const dispatch = useDispatch();
-//   const [dataSubject, setDataSubject] = useState({ name: "" });
-//   const [errors, setErrors] = useState({ name: "" });
-
-//   useEffect(()=>{
-//     return () => {
-//       setDataSubject({name: ""});
-//     };
-//   }, [isUpdate])
-
-//   // Conecto mi estado con los valores del Input:
-//   const handleInputChange = (e) => {
-//     setDataSubject({
-//       ...dataSubject,
-//       [e.target.name]: e.target.value,
-//     });
-//     setErrors(
-//       validateForm({
-//         ...dataSubject,
-//         [e.target.name]: e.target.value,
-//       })
-//     );
-//   };
-
-//   const createSubject = async (e) => {
-//     e.preventDefault();
-//     if(errors.name || !dataSubject.name ) return
-//     await axios.post("http://localhost:3001/subject", dataSubject);
-//     dispatch(getSubjects());
-//     setDataSubject({ name: "" });
-//   };
-
-//   const updateSubject = async (e) => {
-//     e.preventDefault();
-//     if(errors.name) return
-//     await axios.put(`http://localhost:3001/subject/${idSubject}`, dataSubject);
-//     dispatch(getSubjects());
-//     setDataSubject({ name: "" });
-//   };
-
-//   return (
-//     <div>
-//       <Modal show={show} onHide={handleClose}>
-//         <Modal.Header closeButton>
-//           <Modal.Title>Modal heading</Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <form>
-//             <div className={style.formGroup}>
-//               <label htmlFor="name" className={style.label}>
-//                 Nombre:
-//               </label>
-//               <input
-//                 className={style.input}
-//                 name="name"
-//                 type="text"
-//                 onChange={(e) => handleInputChange(e)}
-//                 value={dataSubject.name}
-//               />
-//             </div>
-//             {errors.name && (
-//               <span className={style.error}>{errors.name}</span>
-//             )}
-//             <div className={style.buttonContainer}>
-//               {!isUpdate ? (
-//                 <button
-//                   type="submit"
-//                   className="btn btn-primary"
-//                   onClick={createSubject}
-//                 >
-//                   Create
-//                 </button>
-//               ) : (
-//                 <button
-//                   type="submit"
-//                   className="btn btn-warning"
-//                   onClick={updateSubject}
-//                 >
-//                   Update
-//                 </button>
-//               )}
-//               <button className="btn btn-secondary" onClick={handleClose}>
-//                 Close
-//               </button>
-//             </div>
-//           </form>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           {/* <Button variant="primary" onClick={handleClose}>
-//           Save Changes
-//         </Button> */}
-//         </Modal.Footer>
-//       </Modal>
-//     </div>
-//   );
-// }

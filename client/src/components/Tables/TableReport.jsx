@@ -1,12 +1,15 @@
 import { useSelector } from "react-redux";
 
 export default function TableReport() {
-    const report = useSelector((state)=> state.report)
-    console.log(report)
+  const report = useSelector((state) => state.report);
+  console.log(report);
 
   return (
     <div className="table-responsive">
-      <table className="table table-bordered table-striped">
+      {report.length === 0 ? (
+        <span className="text-primary">You must assign a grade to a student*</span>
+      ) : null}
+      <table className="table table-bordered table-striped mt-3">
         <thead>
           <tr>
             <th scope="col">Academic Year</th>
@@ -33,23 +36,6 @@ export default function TableReport() {
                 <td>{e.Subject.Professor.name}</td>
                 <td>{e.rating}</td>
                 <td>{e.rating > 3 ? "YES" : "NO"}</td>
-                {/* <td>
-                  <button
-                    className="btn btn-danger"
-                    id={e.identification}
-                    onClick={(e) => deleteStudent(e)}
-                  >
-                    Delete
-                  </button>
-                  <button className="btn btn-primary" id={e.identification} onClick={(e)=> handleClick(e)}>
-                    Edit
-                  </button>
-                </td>
-                <td>
-                  <button className="btn btn-info" id={e.identification} onClick={(e)=> handleShow(e)}>
-                    Assign Ratings
-                  </button>
-                </td> */}
               </tr>
             );
           })}
