@@ -57,7 +57,7 @@ export default function FormSubject({ show, handleClose, isUpdate, idSubject }) 
           <form>
             <div className={style.formGroup}>
               <label htmlFor="name" className={style.label}>
-                Nombre:
+                Name:
               </label>
               <input
                 className={style.input}

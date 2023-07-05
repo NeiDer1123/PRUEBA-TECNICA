@@ -17,8 +17,8 @@ export default function Subject() {
   return (
     <div>
       <div className="container">
-        <button className="btn btn-success" onClick={handleClick}>
-          CREAR ASIGNATURA
+        <button className="btn btn-success my-4" onClick={handleClick}>
+          Create Subject
         </button>
         <TableSubjects
           handleShow={handleShow}

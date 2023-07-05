@@ -41,7 +41,7 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
 
   return (
     <div className="table-responsive">
-      <table className="table">
+      <table className="table table-bordered table-striped">
         <thead>
           <tr>
             <th scope="col">Identification</th>
@@ -63,7 +63,7 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
                 <td>{e.age}</td>
                 <td>{e.address}</td>
                 <td>{e.phone}</td>
-                <td>
+                <td className="d-flex justify-content-evenly">
                   <button
                     className="btn btn-danger"
                     id={e.identification}
@@ -74,8 +74,6 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
                   <button className="btn btn-primary" id={e.identification} onClick={(e)=> handleClick(e)}>
                     Edit
                   </button>
-                </td>
-                <td>
                   <button className="btn btn-info" id={e.identification} onClick={(e)=> handleShow(e)}>
                     Assign Ratings
                   </button>

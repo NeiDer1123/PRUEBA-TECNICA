@@ -6,7 +6,7 @@ export default function TableReport() {
 
   return (
     <div className="table-responsive">
-      <table className="table">
+      <table className="table table-bordered table-striped">
         <thead>
           <tr>
             <th scope="col">Academic Year</th>

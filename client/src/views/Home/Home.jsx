@@ -1,21 +1,19 @@
 import { useEffect } from "react";
 import TableReport from "../../components/Tables/TableReport";
-import style from "./Home.module.css";
 import { useDispatch } from "react-redux";
 import { getReport } from "../../redux/actions";
 
 export default function Home() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-      dispatch(getReport())
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(getReport());
+  }, [dispatch]);
 
   return (
-    <div className={style.container}>
-      <div className="container">
-        <TableReport/>
-      </div>
+    <div className="container mt-5">
+      <h1 className="text-center mb-5">ACADEMIC INFORMATION</h1>
+      <TableReport />
     </div>
   );
 }

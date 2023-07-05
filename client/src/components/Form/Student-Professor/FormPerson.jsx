@@ -116,7 +116,7 @@ export default function FormPerson({
         <form className={style.form}>
           <div className={style.formGroup}>
             <label htmlFor="identification" className={style.label}>
-              Identificación:
+              Identification:
             </label>
             <input
               className={style.input}
@@ -134,7 +134,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="name" className={style.label}>
-              Nombre:
+              Name:
             </label>
             <input
               className={style.input}
@@ -150,7 +150,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="lastName" className={style.label}>
-              Apellido:
+              Last Name:
             </label>
             <input
               className={style.input}
@@ -170,7 +170,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="age" className={style.label}>
-              Edad:
+              Age:
             </label>
             <input
               className={style.input}
@@ -186,7 +186,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="address" className={style.label}>
-              Dirección:
+              Address:
             </label>
             <input
               className={style.input}
@@ -206,7 +206,7 @@ export default function FormPerson({
 
           <div className={style.formGroup}>
             <label htmlFor="phone" className={style.label}>
-              Teléfono:
+              Phone:
             </label>
             <input
               className={style.input}
