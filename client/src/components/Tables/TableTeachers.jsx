@@ -84,6 +84,7 @@ export default function TableTeachers({
                     className="btn btn-danger"
                     id={e.identification}
                     onClick={(e) => deleteProfessor(e)}
+                    disabled={searchSubject(subjects, e.identification).length ? true : false}
                   >
                     Eliminar
                   </button>

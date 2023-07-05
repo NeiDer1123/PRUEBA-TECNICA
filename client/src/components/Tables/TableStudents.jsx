@@ -11,7 +11,7 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
   const location = useLocation();
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
-  const ratings = useSelector((state) => state.ratings)
+  const report = useSelector((state) => state.report)
 
   const handleClose = () => setShow(false);
 
@@ -38,8 +38,6 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
 
   const deleteStudent = async (e) => {
     const id = e.target.id;
-    await dispatch(getRatingsOfStudent(id))
-    if(ratings.length > 0) return alert("No se puede eliminar un estudiante con Asignatura y Notas asociadas")
     await axios.delete(`http://localhost:3001/student/${id}`);
     dispatch(getStudets());
   };
@@ -73,6 +71,7 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
                     className="btn btn-danger"
                     id={e.identification}
                     onClick={(e) => deleteStudent(e)}
+                    disabled={report.length ? report.some((item) => item.studentId === e.identification) : false}
                   >
                     Eliminar
                   </button>

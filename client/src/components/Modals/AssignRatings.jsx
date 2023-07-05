@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import validate from "./validate";
+import { getReport } from "../../redux/actions";
 
 export default function AssingRatings({ show, handleClose, studentId }) {
   const [subjectSelected, setSubjectSelected] = useState("");
+  const dispatch = useDispatch();
   const subjects = useSelector((state) => state.subjects);
   const ratings = useSelector((state) => state.ratings);
   const [rating, setRating] = useState({ academicYear: "", rating: "" });
@@ -15,6 +17,10 @@ export default function AssingRatings({ show, handleClose, studentId }) {
   const subjectsWithProfessor = subjects.filter(
     (subject) => subject.professorId !== null
   );
+
+  useEffect(() => {
+    dispatch(getReport());
+  }, [dispatch]);
 
   const handleInputChange = (e) => {
     setRating({
@@ -58,11 +64,13 @@ export default function AssingRatings({ show, handleClose, studentId }) {
       };
       if (validateRaitingSubject(body, ratings))
         return alert("Esta materia ya tiene una calificacion en ese año");
+
       await axios.post(`http://localhost:3001/rating`, body);
       setRating({ academicYear: "", rating: "" });
       setErrors({ academicYear: "", rating: "" });
+      dispatch(getReport());
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
 
@@ -84,7 +92,9 @@ export default function AssingRatings({ show, handleClose, studentId }) {
                 value={rating.academicYear}
                 onChange={(e) => handleInputChange(e)}
               />
-              {errors.academicYear && <span className="text-danger small">{errors.academicYear}</span>}
+              {errors.academicYear && (
+                <span className="text-danger small">{errors.academicYear}</span>
+              )}
             </div>
             <div className="col">
               <input
@@ -96,7 +106,9 @@ export default function AssingRatings({ show, handleClose, studentId }) {
                 value={rating.rating}
                 onChange={(e) => handleInputChange(e)}
               />
-              {errors.rating && <span className="text-danger small">{errors.rating}</span>}
+              {errors.rating && (
+                <span className="text-danger small">{errors.rating}</span>
+              )}
             </div>
           </div>
           <select
@@ -117,7 +129,9 @@ export default function AssingRatings({ show, handleClose, studentId }) {
             })}
           </select>
           {subjectsWithProfessor.length === 0 ? (
-            <span className="text-primary small">Solo aparecerán las materias con profesores asignados.*</span>
+            <span className="text-primary small">
+              Solo aparecerán las materias con profesores asignados.*
+            </span>
           ) : null}
         </Modal.Body>
         <Modal.Footer>

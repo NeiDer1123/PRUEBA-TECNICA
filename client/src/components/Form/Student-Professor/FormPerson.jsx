@@ -75,19 +75,26 @@ export default function FormPerson({
     e.preventDefault();
 
     // Verifico que no hayan campos vacios:
-    if (verifyData(dataPerson))
-      return alert("No puede haber campos vacios.");
+    if (verifyData(dataPerson)) return alert("No puede haber campos vacios.");
 
     if (location.pathname === "/student") {
-      await axios.post("http://localhost:3001/student", dataPerson);
-      resetValues();
-      dispatch(getStudets());
-      return alert("Estudiante Creado");
+      try {
+        await axios.post("http://localhost:3001/student", dataPerson);
+        resetValues();
+        dispatch(getStudets());
+        return alert("Estudiante Creado");
+      } catch (error) {
+        return alert("Ya hay un profesor o estudiante con ese ID");
+      }
     } else {
-      await axios.post("http://localhost:3001/professor", dataPerson);
-      resetValues();
-      dispatch(getTeachers());
-      return alert("Profesor Creado");
+      try {
+        await axios.post("http://localhost:3001/professor", dataPerson);
+        resetValues();
+        dispatch(getTeachers());
+        return alert("Profesor Creado");
+      } catch (error) {
+        return alert("Ya hay un profesor o estudiante con ese ID");
+      }
     }
   };
 
@@ -100,13 +107,21 @@ export default function FormPerson({
     );
 
     if (location.pathname === "/student") {
-      await axios.put(`http://localhost:3001/student/${idToUpdate}`, body);
-      resetValues();
-      dispatch(getStudets());
+      try {
+        await axios.put(`http://localhost:3001/student/${idToUpdate}`, body);
+        resetValues();
+        dispatch(getStudets());
+      } catch (error) {
+        return alert(error.message);
+      }
     } else {
-      await axios.put(`http://localhost:3001/professor/${idToUpdate}`, body);
-      resetValues();
-      dispatch(getTeachers());
+      try {
+        await axios.put(`http://localhost:3001/professor/${idToUpdate}`, body);
+        resetValues();
+        dispatch(getTeachers());
+      } catch (error) {
+        return alert(error.message);
+      }
     }
     return alert("Datos actualizados correctamente");
   };

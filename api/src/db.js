@@ -28,7 +28,7 @@ Student.hasMany(Rating, { foreignKey: "studentId" });
 Rating.belongsTo(Student, { foreignKey: "studentId" });
 
 // Relación entre Subject y Rating (Uno a Muchos)
-Subject.hasMany(Rating, { foreignKey: "subjectId" });
+Subject.hasMany(Rating, { foreignKey: "subjectId", onDelete: 'CASCADE' });
 Rating.belongsTo(Subject, { foreignKey: "subjectId" });
 
 // Relación de muchos a muchos entre Estudiante y Asignatura
