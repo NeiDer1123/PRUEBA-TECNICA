@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudets, getTeachers } from "../../../redux/actions";
 import { useState, useEffect } from "react";
+import { changeString } from "../../../helpers/funtions";
 import Swal from "sweetalert2";
 
 export default function FormPerson({
@@ -190,7 +191,7 @@ export default function FormPerson({
               id="name"
               name="name"
               type="text"
-              value={dataPerson.name}
+              value={changeString(dataPerson.name)}
               placeholder={isUpdate ? (person.name ? person.name : "") : ""}
               onChange={(e) => handleInputChange(e)}
             />
@@ -206,7 +207,7 @@ export default function FormPerson({
               id="lastName"
               name="lastName"
               type="text"
-              value={dataPerson.lastName}
+              value={changeString(dataPerson.lastName)}
               placeholder={
                 isUpdate ? (person.lastName ? person.lastName : "") : ""
               }
