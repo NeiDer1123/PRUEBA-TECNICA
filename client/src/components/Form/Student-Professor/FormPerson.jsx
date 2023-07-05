@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudets, getTeachers } from "../../../redux/actions";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 export default function FormPerson({
   show,
@@ -74,28 +75,41 @@ export default function FormPerson({
   const createPerson = async (e) => {
     e.preventDefault();
 
-    // Verifico que no hayan campos vacios:
-    if (verifyData(dataPerson)) return alert("No puede haber campos vacios o con errores.");
-    console.log(errors)
-    if (verifyError(errors)) return alert("No puede haber errores.");
+    // Verifico que no hayan campos vacios ni errores:
+    if (verifyData(dataPerson) || verifyError(errors)) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No puede haber campos vacios o errores.",
+      });
+    }
 
     if (location.pathname === "/student") {
       try {
         await axios.post("http://localhost:3001/student", dataPerson);
         resetValues();
         dispatch(getStudets());
-        return alert("Estudiante Creado");
+
+        Swal.fire("Buen trabajo!", "Estudiante Creado", "success");
       } catch (error) {
-        return alert("Ya hay un profesor o estudiante con ese ID");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Ya hay un profesor o estudiante con ese ID!",
+        });
       }
     } else {
       try {
         await axios.post("http://localhost:3001/professor", dataPerson);
         resetValues();
         dispatch(getTeachers());
-        return alert("Profesor Creado");
+        return Swal.fire("Buen trabajo!", "Profesor Creado", "success");
       } catch (error) {
-        return alert("Ya hay un profesor o estudiante con ese ID");
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Ya hay un profesor o estudiante con ese ID!",
+        });
       }
     }
   };
@@ -114,7 +128,11 @@ export default function FormPerson({
         resetValues();
         dispatch(getStudets());
       } catch (error) {
-        return alert(error.message);
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No fue posible realizar la actualización",
+        });
       }
     } else {
       try {
@@ -122,10 +140,14 @@ export default function FormPerson({
         resetValues();
         dispatch(getTeachers());
       } catch (error) {
-        return alert(error.message);
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No fue posible realizar la actualización",
+        });
       }
     }
-    return alert("Datos actualizados correctamente");
+    return Swal.fire("Buen trabajo!", "Datos actualizados correctamente", "success");
   };
 
   return (
@@ -273,11 +295,6 @@ export default function FormPerson({
           </div>
         </form>
       </Modal.Body>
-      <Modal.Footer>
-        {/* <Button variant="primary" onClick={handleClose}>
-          Save Changes
-        </Button> */}
-      </Modal.Footer>
     </Modal>
   );
 }

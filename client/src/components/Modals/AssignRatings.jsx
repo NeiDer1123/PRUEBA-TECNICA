@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import validate from "./validate";
 import { getRatingsOfStudent, getReport } from "../../redux/actions";
+import Swal from "sweetalert2";
 
 export default function AssingRatings({ show, handleClose, studentId }) {
   const [subjectSelected, setSubjectSelected] = useState("");
@@ -51,7 +52,11 @@ export default function AssingRatings({ show, handleClose, studentId }) {
 
   const handleSubmit = async () => {
     if (errors.academicYear || errors.rating || !subjectSelected) {
-      return alert("No debe haber ningun campo vacio o con errores");
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No debe haber ningun campo vacio o con errores.",
+      });
     }
     try {
       const body = {
@@ -60,8 +65,13 @@ export default function AssingRatings({ show, handleClose, studentId }) {
         studentId,
         subjectId: subjectSelected,
       };
-      if (validateRaitingSubject(body, ratings))
-        return alert("Esta materia ya tiene una calificación en ese año");
+      if (validateRaitingSubject(body, ratings)){
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Esta materia ya tiene una calificación en ese año.",
+        });
+      }
 
       await axios.post(`http://localhost:3001/rating`, body);
       //Actualizo y Seteo la informacion
@@ -70,9 +80,13 @@ export default function AssingRatings({ show, handleClose, studentId }) {
       setRating({ academicYear: "", rating: "" });
       setErrors({ academicYear: "", rating: "" });
 
-      return alert("Calificacion asignada correctamente")
+      return Swal.fire("Buen trabajo!", "Calificion asignada correctamente", "success");
     } catch (error) {
-      alert(error.message);
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No fue posible realizar la Actualizacion.",
+      });
     }
   };
 
@@ -138,7 +152,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleSubmit}>
-            Assign
+            Asignar
           </Button>
         </Modal.Footer>
       </Modal>

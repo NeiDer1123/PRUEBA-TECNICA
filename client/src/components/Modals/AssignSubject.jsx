@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { getSubjects } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2"
 
 export default function AssignSubject({ show, handleClose, professorId }) {
   const [subjectSelected, setSubjectSelected] = useState("");
@@ -23,7 +24,7 @@ export default function AssignSubject({ show, handleClose, professorId }) {
       professorId: professorId,
     };
     await axios.put(`http://localhost:3001/subject/${subjectSelected}`, body);
-    alert("Asignatura Asignada")
+    Swal.fire("Buen trabajo!", "Asignatura Asignada", "success");
     // Actualizo el arreglo de asignaturas, para el filtrado de profesores sin asignaturas:
     dispatch(getSubjects());
   };

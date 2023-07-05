@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 import { changeString } from "../../../helpers/funtions";
+import Swal from "sweetalert2";
 
 export default function FormSubject({
   show,
@@ -46,21 +47,33 @@ export default function FormSubject({
     e.preventDefault();
 
     if (validateNameSubject(dataSubject.name, subjects))
-      return alert("Ya existe una asignatura con este nombre.");
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ya existe una asignatura con este nombre.",
+      });
 
     if (errors.name || !dataSubject.name)
-      return alert("Existen errores o datos vacíos.")
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Existen Errores o datos vacios.",
+      });
 
-    if(!isUpdate){
+    if (!isUpdate) {
       await axios.post("http://localhost:3001/subject", dataSubject);
       dispatch(getSubjects());
       setDataSubject({ name: "" });
-      return alert("Asignatura Creada")
+      return Swal.fire("Buen trabajo!", "Asignatura Creada", "success");
     } else {
-      await axios.put(`http://localhost:3001/subject/${idSubject}`, dataSubject);
+      await axios.put(
+        `http://localhost:3001/subject/${idSubject}`,
+        dataSubject
+      );
       dispatch(getSubjects());
       setDataSubject({ name: "" });
-      return alert("Asignatura Actualizada")
+      return Swal.fire("Buen trabajo!", "Asignatura Actualizada", "success");
+      
     }
   };
 
