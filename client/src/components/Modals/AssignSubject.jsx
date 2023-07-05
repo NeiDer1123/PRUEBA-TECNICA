@@ -14,8 +14,6 @@ export default function AssignSubject({ show, handleClose, professorId }) {
     return e.professorId === null
   })
 
-  console.log(teacherWhitoutSubject)
-
   const handleOptionChange = (e) => {
     setSubjectSelected(e.target.value);
   };
@@ -25,7 +23,7 @@ export default function AssignSubject({ show, handleClose, professorId }) {
       professorId: professorId,
     };
     await axios.put(`http://localhost:3001/subject/${subjectSelected}`, body);
-
+    alert("Asignatura Asignada")
     // Actualizo el arreglo de asignaturas, para el filtrado de profesores sin asignaturas:
     dispatch(getSubjects());
   };

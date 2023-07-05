@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 export default function TableReport() {
   const report = useSelector((state) => state.report);
-  console.log(report);
 
   return (
     <div className="table-responsive">

@@ -1,3 +1,4 @@
+import { sortReportByAcademicYear } from "../helpers/funtions";
 import {
   GET_STUDENTS,
   GET_TEACHERS,
@@ -47,7 +48,6 @@ const getPerson = (id, location) => {
     if (location === "/student") {
       const response = await axios.get(`http://localhost:3001/student/${id}`);
       const student = response.data;
-      console.log(student);
       dispatch({
         type: GET_PERSON,
         payload: student,
@@ -91,9 +91,10 @@ const getReport = () => {
   return async function (dispatch) {
     const response = await axios.get("http://localhost:3001/rating/report");
     const report = response.data;
+    const reportOrdered = sortReportByAcademicYear(report)
     dispatch({
       type: GET_REPORT,
-      payload: report,
+      payload: reportOrdered,
     });
   };
 };

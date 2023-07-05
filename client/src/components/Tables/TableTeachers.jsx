@@ -77,7 +77,7 @@ export default function TableTeachers({
                 <td>
                   {searchSubject(subjects, e.identification).length
                     ? searchSubject(subjects, e.identification)[0].name
-                    : "No subject"}
+                    : "Sin Asignaturas"}
                 </td>
                 <td className="d-flex justify-content-evenly">
                   <button

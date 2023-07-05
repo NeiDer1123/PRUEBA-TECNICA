@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import validate from "./validate";
-import { getReport } from "../../redux/actions";
+import { getRatingsOfStudent, getReport } from "../../redux/actions";
 
 export default function AssingRatings({ show, handleClose, studentId }) {
   const [subjectSelected, setSubjectSelected] = useState("");
@@ -42,8 +42,6 @@ export default function AssingRatings({ show, handleClose, studentId }) {
   // Se valida que no se ingrese la misma calificacion a una materia en el mismo año.
   const validateRaitingSubject = (newData, oldData) => {
     return oldData.some((e) => {
-      console.log(e.academicYear);
-      console.log(newData.academicYear);
       return (
         e.academicYear === parseInt(newData.academicYear) &&
         e.Subject.id === parseInt(newData.subjectId)
@@ -63,12 +61,16 @@ export default function AssingRatings({ show, handleClose, studentId }) {
         subjectId: subjectSelected,
       };
       if (validateRaitingSubject(body, ratings))
-        return alert("Esta materia ya tiene una calificacion en ese año");
+        return alert("Esta materia ya tiene una calificación en ese año");
 
       await axios.post(`http://localhost:3001/rating`, body);
+      //Actualizo y Seteo la informacion
+      dispatch(getReport());
+      dispatch(getRatingsOfStudent(studentId))
       setRating({ academicYear: "", rating: "" });
       setErrors({ academicYear: "", rating: "" });
-      dispatch(getReport());
+
+      return alert("Calificacion asignada correctamente")
     } catch (error) {
       alert(error.message);
     }
@@ -111,6 +113,11 @@ export default function AssingRatings({ show, handleClose, studentId }) {
               )}
             </div>
           </div>
+          {subjectsWithProfessor.length === 0 ? (
+            <span className="text-primary small">
+              Solo aparecerán las materias con profesores asignados.*
+            </span>
+          ) : null}
           <select
             className={`form-select ${!subjectSelected ? "text-danger" : ""}`}
             aria-label="Choose the subject"
@@ -128,11 +135,6 @@ export default function AssingRatings({ show, handleClose, studentId }) {
               );
             })}
           </select>
-          {subjectsWithProfessor.length === 0 ? (
-            <span className="text-primary small">
-              Solo aparecerán las materias con profesores asignados.*
-            </span>
-          ) : null}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleSubmit}>

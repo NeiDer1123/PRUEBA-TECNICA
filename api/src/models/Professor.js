@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
     "Professor",
     {
       identification: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
         unique: true,
       },

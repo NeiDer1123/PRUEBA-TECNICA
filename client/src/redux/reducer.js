@@ -15,29 +15,7 @@ const initialState = {
   person: {},
   subject: {},
   ratings: [],
-  report: [
-    {
-      id: 1,
-      academicYear: "2014",
-      rating: 2.5,
-      studentId: 9687,
-      subjectId: 1,
-      Subject: {
-        id: 1,
-        name: "programacion",
-        Professor: {
-          identification: 524,
-          name: "John",
-          lastName: "Doe",
-        },
-      },
-      Student: {
-        identification: 9687,
-        name: "neider",
-        lastName: "Doe",
-      },
-    },
-  ],
+  report: [],
 };
 
 function rootReducer(state = initialState, action) {

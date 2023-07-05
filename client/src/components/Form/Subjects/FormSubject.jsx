@@ -46,21 +46,21 @@ export default function FormSubject({
     e.preventDefault();
 
     if (validateNameSubject(dataSubject.name, subjects))
-      return alert("A subject with this name already exists.");
+      return alert("Ya existe una asignatura con este nombre.");
 
     if (errors.name || !dataSubject.name)
-      return alert("There are errors or empty data.")
+      return alert("Existen errores o datos vacíos.")
 
     if(!isUpdate){
       await axios.post("http://localhost:3001/subject", dataSubject);
       dispatch(getSubjects());
       setDataSubject({ name: "" });
-      return alert("Subject created")
+      return alert("Asignatura Creada")
     } else {
       await axios.put(`http://localhost:3001/subject/${idSubject}`, dataSubject);
       dispatch(getSubjects());
       setDataSubject({ name: "" });
-      return alert("Subject updated")
+      return alert("Asignatura Actualizada")
     }
   };
 
@@ -68,7 +68,7 @@ export default function FormSubject({
     <div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Formulario de Creación.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>

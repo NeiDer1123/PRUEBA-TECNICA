@@ -1,4 +1,4 @@
-import { validateForm, verifyData } from "./validate";
+import { validateForm, verifyData, verifyError } from "./validate";
 import style from "../Form.module.css";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -75,7 +75,9 @@ export default function FormPerson({
     e.preventDefault();
 
     // Verifico que no hayan campos vacios:
-    if (verifyData(dataPerson)) return alert("No puede haber campos vacios.");
+    if (verifyData(dataPerson)) return alert("No puede haber campos vacios o con errores.");
+    console.log(errors)
+    if (verifyError(errors)) return alert("No puede haber errores.");
 
     if (location.pathname === "/student") {
       try {

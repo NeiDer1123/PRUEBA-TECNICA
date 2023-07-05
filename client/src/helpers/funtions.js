@@ -1,4 +1,3 @@
-
 const changeString = (string) => {
   //Convierto en minusculas y las divido en un arreglo.
   const words = string.toLowerCase().split(" ");
@@ -14,4 +13,22 @@ const changeString = (string) => {
   return combineWords;
 };
 
-export { changeString };
+const sortReportByAcademicYear = (arr) => {
+  return arr.sort((a, b) => {
+    const yearA = a.academicYear;
+    const yearB = b.academicYear;
+
+    if (yearA < yearB) {
+      return -1;
+    } else if (yearA > yearB) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+};
+
+export {
+  changeString,
+  sortReportByAcademicYear
+ };
