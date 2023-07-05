@@ -8,8 +8,13 @@ import validate from "./validate";
 export default function AssingRatings({ show, handleClose, studentId }) {
   const [subjectSelected, setSubjectSelected] = useState("");
   const subjects = useSelector((state) => state.subjects);
+  const ratings = useSelector((state) => state.ratings);
   const [rating, setRating] = useState({ academicYear: "", rating: "" });
   const [errors, setErrors] = useState({ academicYear: "", rating: "" });
+
+  const subjectsWithProfessor = subjects.filter(
+    (subject) => subject.professorId !== null
+  );
 
   const handleInputChange = (e) => {
     setRating({
@@ -28,27 +33,36 @@ export default function AssingRatings({ show, handleClose, studentId }) {
     setSubjectSelected(e.target.value);
   };
 
+  // Se valida que no se ingrese la misma calificacion a una materia en el mismo año.
+  const validateRaitingSubject = (newData, oldData) => {
+    return oldData.some((e) => {
+      console.log(e.academicYear);
+      console.log(newData.academicYear);
+      return (
+        e.academicYear === parseInt(newData.academicYear) &&
+        e.Subject.id === parseInt(newData.subjectId)
+      );
+    });
+  };
+
   const handleSubmit = async () => {
     if (errors.academicYear || errors.rating || !subjectSelected) {
-      return;
-    } else {
-      try {
-        const body = {
-          academicYear: rating.academicYear,
-          rating: rating.rating,
-          studentId,
-          subjectId: subjectSelected,
-        };
-        console.log(body);
-        await axios.post(
-          `http://localhost:3001/rating`,
-          body
-        );
-        setRating({ academicYear: "", rating: "" });
-        setErrors({ academicYear: "", rating: "" });
-      } catch (error) {
-        console.log(error.message)
-      }
+      return alert("No debe haber ningun campo vacio o con errores");
+    }
+    try {
+      const body = {
+        academicYear: rating.academicYear,
+        rating: rating.rating,
+        studentId,
+        subjectId: subjectSelected,
+      };
+      if (validateRaitingSubject(body, ratings))
+        return alert("Esta materia ya tiene una calificacion en ese año");
+      await axios.post(`http://localhost:3001/rating`, body);
+      setRating({ academicYear: "", rating: "" });
+      setErrors({ academicYear: "", rating: "" });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -70,7 +84,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
                 value={rating.academicYear}
                 onChange={(e) => handleInputChange(e)}
               />
-              {errors.academicYear && <span>{errors.academicYear}</span>}
+              {errors.academicYear && <span className="text-danger small">{errors.academicYear}</span>}
             </div>
             <div className="col">
               <input
@@ -82,7 +96,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
                 value={rating.rating}
                 onChange={(e) => handleInputChange(e)}
               />
-              {errors.rating && <span>{errors.rating}</span>}
+              {errors.rating && <span className="text-danger small">{errors.rating}</span>}
             </div>
           </div>
           <select
@@ -92,9 +106,9 @@ export default function AssingRatings({ show, handleClose, studentId }) {
             onChange={handleOptionChange}
           >
             <option value="" className="text-danger">
-            Debes elegir una asignatura:
+              Debes elegir una asignatura:
             </option>
-            {subjects.map((e) => {
+            {subjectsWithProfessor.map((e) => {
               return (
                 <option key={e.id} value={e.id}>
                   {e.name}
@@ -102,6 +116,9 @@ export default function AssingRatings({ show, handleClose, studentId }) {
               );
             })}
           </select>
+          {subjectsWithProfessor.length === 0 ? (
+            <span className="text-primary small">Solo aparecerán las materias con profesores asignados.*</span>
+          ) : null}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleSubmit}>

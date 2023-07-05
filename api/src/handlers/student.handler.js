@@ -134,7 +134,7 @@ const getStudentRatings = async (req, res) => {
       attributes: ["academicYear", "rating"],
       include: {
         model: Subject,
-        attributes: ["name"],
+        attributes: ["id","name"],
       },
     });
 
@@ -142,7 +142,7 @@ const getStudentRatings = async (req, res) => {
       return res.status(404).json({ error: "Estudiante no encontrado" });
     }
 
-    res.json({ ratings });
+    res.json( ratings );
   } catch (error) {
     console.log(error);
     res

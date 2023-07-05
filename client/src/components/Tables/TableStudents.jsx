@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getPerson, getStudets, getSubjects } from "../../redux/actions";
+import { getPerson, getRatingsOfStudent, getStudets, getSubjects } from "../../redux/actions";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AssingRatings from "../Modals/AssignRatings";
@@ -11,12 +11,15 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
   const location = useLocation();
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
+  const ratings = useSelector((state) => state.ratings)
 
   const handleClose = () => setShow(false);
 
   const handleShow = (e) => {
+    const id = e.target.id
     setShow(true);
-    setStudentId(e.target.id);
+    setStudentId(id);
+    dispatch(getRatingsOfStudent(id))
   };
 
   const handleClick = (e) => {
@@ -35,6 +38,8 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
 
   const deleteStudent = async (e) => {
     const id = e.target.id;
+    await dispatch(getRatingsOfStudent(id))
+    if(ratings.length > 0) return alert("No se puede eliminar un estudiante con Asignatura y Notas asociadas")
     await axios.delete(`http://localhost:3001/student/${id}`);
     dispatch(getStudets());
   };

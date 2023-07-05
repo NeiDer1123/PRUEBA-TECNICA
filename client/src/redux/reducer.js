@@ -1,5 +1,6 @@
 import {
   GET_PERSON,
+  GET_RATING,
   GET_REPORT,
   GET_STUDENTS,
   GET_SUBJECT,
@@ -13,6 +14,7 @@ const initialState = {
   subjects: [],
   person: {},
   subject: {},
+  ratings: [],
   report: [
     {
       id: 1,
@@ -57,6 +59,9 @@ function rootReducer(state = initialState, action) {
 
     case GET_REPORT:
       return { ...state, report: action.payload };
+
+    case GET_RATING:
+      return {...state, ratings: action.payload}
 
     default:
       return { ...state };

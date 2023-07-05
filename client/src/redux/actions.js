@@ -1,4 +1,12 @@
-import { GET_STUDENTS, GET_TEACHERS, GET_SUBJECTS, GET_PERSON, GET_REPORT, GET_SUBJECT } from "./actions-types";
+import {
+  GET_STUDENTS,
+  GET_TEACHERS,
+  GET_SUBJECTS,
+  GET_PERSON,
+  GET_REPORT,
+  GET_SUBJECT,
+  GET_RATING,
+} from "./actions-types";
 import axios from "axios";
 
 const getStudets = () => {
@@ -39,7 +47,7 @@ const getPerson = (id, location) => {
     if (location === "/student") {
       const response = await axios.get(`http://localhost:3001/student/${id}`);
       const student = response.data;
-      console.log(student)
+      console.log(student);
       dispatch({
         type: GET_PERSON,
         payload: student,
@@ -57,13 +65,25 @@ const getPerson = (id, location) => {
 
 const getSubject = (id) => {
   return async function (dispatch) {
-      const response = await axios.get(`http://localhost:3001/subject/${id}`);
-      const student = response.data;
-      console.log(student)
-      dispatch({
-        type: GET_SUBJECT,
-        payload: student,
-      });
+    const response = await axios.get(`http://localhost:3001/subject/${id}`);
+    const subject = response.data;
+    dispatch({
+      type: GET_SUBJECT,
+      payload: subject,
+    });
+  };
+};
+
+const getRatingsOfStudent = (id) => {
+  return async function (dispatch) {
+    const response = await axios.get(
+      `http://localhost:3001/student/${id}/ratings`
+    );
+    const rating = response.data;
+    dispatch({
+      type: GET_RATING,
+      payload: rating,
+    });
   };
 };
 
@@ -78,4 +98,12 @@ const getReport = () => {
   };
 };
 
-export { getStudets, getTeachers, getSubjects, getPerson, getReport, getSubject };
+export {
+  getStudets,
+  getTeachers,
+  getSubjects,
+  getPerson,
+  getReport,
+  getSubject,
+  getRatingsOfStudent,
+};

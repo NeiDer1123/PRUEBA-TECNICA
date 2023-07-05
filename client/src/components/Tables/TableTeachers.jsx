@@ -39,8 +39,7 @@ export default function TableTeachers({
   }, [dispatch]);
 
   const searchSubject = (subjects, idProfessor) => {
-    const subject = subjects.filter((subject) => subject.professorId == idProfessor);
-    const obj = Object.fromEntries
+    const subject = subjects.filter((subject) => subject.professorId === idProfessor);
     return subject;
   };
 
