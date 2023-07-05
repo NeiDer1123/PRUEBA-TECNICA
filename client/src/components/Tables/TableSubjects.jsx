@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../../redux/actions";
-import style from "./Tables.module.css"
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -26,7 +25,7 @@ export default function TableSubjects({handleShow,setIsUpdate, setIdSubject}) {
   }
 
   return (
-    <div className={style.container}>
+    <div className="table-responsive">
       <table className="table">
         <thead>
           <tr>

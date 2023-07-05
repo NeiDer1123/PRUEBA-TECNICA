@@ -1,4 +1,3 @@
-import style from "./Tables.module.css";
 import { useSelector } from "react-redux";
 
 export default function TableReport() {
@@ -6,7 +5,7 @@ export default function TableReport() {
     console.log(report)
 
   return (
-    <div className={style.container}>
+    <div className="table-responsive">
       <table className="table">
         <thead>
           <tr>

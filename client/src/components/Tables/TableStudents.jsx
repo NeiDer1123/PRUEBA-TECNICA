@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getPerson, getStudets, getSubjects } from "../../redux/actions";
-import style from "./Tables.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AssingRatings from "../Modals/AssignRatings";
@@ -41,7 +40,7 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
   };
 
   return (
-    <div className={style.container}>
+    <div className="table-responsive">
       <table className="table">
         <thead>
           <tr>

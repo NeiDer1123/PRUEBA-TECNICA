@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getPerson, getSubjects, getTeachers } from "../../redux/actions";
-import style from "./Tables.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AssignSubject from "../Modals/AssignSubject";
@@ -41,7 +40,7 @@ export default function TableTeachers({ handleShowForm,setIsUpdate, setIdToUpdat
   };
 
   return (
-    <div className={style.container}>
+    <div className="table-responsive">
       <table className="table">
         <thead>
           <tr>
