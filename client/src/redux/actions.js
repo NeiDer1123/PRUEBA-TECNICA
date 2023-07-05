@@ -12,7 +12,7 @@ import axios from "axios";
 
 const getStudets = () => {
   return async function (dispatch) {
-    const response = await axios.get("http://localhost:3001/student");
+    const response = await axios.get("/student");
     const students = response.data;
     dispatch({
       type: GET_STUDENTS,
@@ -23,7 +23,7 @@ const getStudets = () => {
 
 const getTeachers = () => {
   return async function (dispatch) {
-    const response = await axios.get("http://localhost:3001/professor");
+    const response = await axios.get("/professor");
     const teachers = response.data;
     dispatch({
       type: GET_TEACHERS,
@@ -34,7 +34,7 @@ const getTeachers = () => {
 
 const getSubjects = () => {
   return async function (dispatch) {
-    const response = await axios.get("http://localhost:3001/subject");
+    const response = await axios.get("/subject");
     const subjects = response.data;
     dispatch({
       type: GET_SUBJECTS,
@@ -46,14 +46,14 @@ const getSubjects = () => {
 const getPerson = (id, location) => {
   return async function (dispatch) {
     if (location === "/student") {
-      const response = await axios.get(`http://localhost:3001/student/${id}`);
+      const response = await axios.get(`/student/${id}`);
       const student = response.data;
       dispatch({
         type: GET_PERSON,
         payload: student,
       });
     } else {
-      const response = await axios.get(`http://localhost:3001/professor/${id}`);
+      const response = await axios.get(`/professor/${id}`);
       const professor = response.data;
       dispatch({
         type: GET_PERSON,
@@ -65,7 +65,7 @@ const getPerson = (id, location) => {
 
 const getSubject = (id) => {
   return async function (dispatch) {
-    const response = await axios.get(`http://localhost:3001/subject/${id}`);
+    const response = await axios.get(`/subject/${id}`);
     const subject = response.data;
     dispatch({
       type: GET_SUBJECT,
@@ -77,7 +77,7 @@ const getSubject = (id) => {
 const getRatingsOfStudent = (id) => {
   return async function (dispatch) {
     const response = await axios.get(
-      `http://localhost:3001/student/${id}/ratings`
+      `/student/${id}/ratings`
     );
     const rating = response.data;
     dispatch({
@@ -89,7 +89,7 @@ const getRatingsOfStudent = (id) => {
 
 const getReport = () => {
   return async function (dispatch) {
-    const response = await axios.get("http://localhost:3001/rating/report");
+    const response = await axios.get("/rating/report");
     const report = response.data;
     const reportOrdered = sortReportByAcademicYear(report)
     dispatch({

@@ -61,13 +61,13 @@ export default function FormSubject({
       });
 
     if (!isUpdate) {
-      await axios.post("http://localhost:3001/subject", dataSubject);
+      await axios.post("/subject", dataSubject);
       dispatch(getSubjects());
       setDataSubject({ name: "" });
       return Swal.fire("Buen trabajo!", "Asignatura Creada", "success");
     } else {
       await axios.put(
-        `http://localhost:3001/subject/${idSubject}`,
+        `/subject/${idSubject}`,
         dataSubject
       );
       dispatch(getSubjects());

@@ -73,7 +73,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
         });
       }
 
-      await axios.post(`http://localhost:3001/rating`, body);
+      await axios.post(`/rating`, body);
       //Actualizo y Seteo la informacion
       dispatch(getReport());
       dispatch(getRatingsOfStudent(studentId))

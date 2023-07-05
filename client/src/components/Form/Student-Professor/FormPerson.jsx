@@ -86,7 +86,7 @@ export default function FormPerson({
 
     if (location.pathname === "/student") {
       try {
-        await axios.post("http://localhost:3001/student", dataPerson);
+        await axios.post("/student", dataPerson);
         resetValues();
         dispatch(getStudets());
 
@@ -100,7 +100,7 @@ export default function FormPerson({
       }
     } else {
       try {
-        await axios.post("http://localhost:3001/professor", dataPerson);
+        await axios.post("/professor", dataPerson);
         resetValues();
         dispatch(getTeachers());
         return Swal.fire("Buen trabajo!", "Profesor Creado", "success");
@@ -124,7 +124,7 @@ export default function FormPerson({
 
     if (location.pathname === "/student") {
       try {
-        await axios.put(`http://localhost:3001/student/${idToUpdate}`, body);
+        await axios.put(`/student/${idToUpdate}`, body);
         resetValues();
         dispatch(getStudets());
       } catch (error) {
@@ -136,7 +136,7 @@ export default function FormPerson({
       }
     } else {
       try {
-        await axios.put(`http://localhost:3001/professor/${idToUpdate}`, body);
+        await axios.put(`/professor/${idToUpdate}`, body);
         resetValues();
         dispatch(getTeachers());
       } catch (error) {

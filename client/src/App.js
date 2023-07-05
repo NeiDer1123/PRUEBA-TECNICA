@@ -1,6 +1,8 @@
+import axios from "axios";
 import { Home, Student, Professor, Subject} from "./views";
 import { Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   return (

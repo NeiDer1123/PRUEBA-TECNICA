@@ -38,7 +38,7 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
 
   const deleteStudent = async (e) => {
     const id = e.target.id;
-    await axios.delete(`http://localhost:3001/student/${id}`);
+    await axios.delete(`/student/${id}`);
     dispatch(getStudets());
   };
 

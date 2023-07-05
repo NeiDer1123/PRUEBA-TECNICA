@@ -45,7 +45,7 @@ export default function TableTeachers({
 
   const deleteProfessor = async (e) => {
     const id = e.target.id;
-    await axios.delete(`http://localhost:3001/professor/${id}`);
+    await axios.delete(`/professor/${id}`);
     dispatch(getTeachers());
   };
 
