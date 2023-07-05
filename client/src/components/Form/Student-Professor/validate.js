@@ -25,8 +25,10 @@ const validateForm = (dataPerson) => {
 
   if (!dataPerson.age) {
     errors.age = "El campo de edad no puede estar vacío";
-  } else if(dataPerson.age.length > 2){
-    errors.age = "Debe ser una edad acorde"
+  } else if (dataPerson.age < 0) {
+    errors.age = "La edad no puede ser un número negativo";
+  } else if (dataPerson.age.length > 2) {
+    errors.age = "Debe ser una edad acorde";
   }
 
   if (!dataPerson.address) {
@@ -35,6 +37,8 @@ const validateForm = (dataPerson) => {
 
   if (!dataPerson.phone) {
     errors.phone = "El campo de teléfono no puede estar vacío";
+  } else if (dataPerson.phone < 0) {
+    errors.phone = "El número de teléfono no puede ser negativo";
   } else if (!/^\d+$/.test(dataPerson.phone)) {
     errors.phone = "El número de teléfono solo puede contener números";
   }
