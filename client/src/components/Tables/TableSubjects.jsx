@@ -27,7 +27,7 @@ export default function TableSubjects({ handleShow, setIsUpdate, setIdSubject })
 
   return (
     <div className="table-responsive">
-      <table className="table table-bordered table-striped">
+      <table >
         <thead>
           <tr className="text-center">
             <th scope="col">Identification</th>

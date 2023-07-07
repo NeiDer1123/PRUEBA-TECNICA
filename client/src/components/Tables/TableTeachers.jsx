@@ -51,7 +51,7 @@ export default function TableTeachers({
 
   return (
     <div className="table-responsive">
-      <table className="table table-bordered table-striped">
+      <table >
         <thead>
           <tr className="text-center">
             <th scope="col">Identificación</th>

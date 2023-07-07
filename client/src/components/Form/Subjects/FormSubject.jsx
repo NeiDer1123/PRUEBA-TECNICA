@@ -81,7 +81,7 @@ export default function FormSubject({
     <div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Formulario de Creación.</Modal.Title>
+          <Modal.Title className={style.modelTittle}>Formulario de Creación.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>

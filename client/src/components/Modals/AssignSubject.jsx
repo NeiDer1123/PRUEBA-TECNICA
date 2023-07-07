@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { getSubjects } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import styles from "../Form/Form.module.css"
 import Swal from "sweetalert2"
 
 export default function AssignSubject({ show, handleClose, professorId }) {
@@ -33,9 +34,9 @@ export default function AssignSubject({ show, handleClose, professorId }) {
     <div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Asignaturas Disponibles.</Modal.Title>
+          <Modal.Title className={styles.modelTittle}>Asignaturas Disponibles.</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={styles.formGroup}>
           <select
             className="form-select"
             aria-label="Choose the subject"

@@ -44,7 +44,7 @@ export default function TableStudents({handleShowForm,setIsUpdate, setIdToUpdate
 
   return (
     <div className="table-responsive">
-      <table className="table table-bordered table-striped">
+      <table >
         <thead>
           <tr className="text-center">
             <th scope="col">Identificación</th>

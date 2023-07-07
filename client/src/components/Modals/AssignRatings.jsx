@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import validate from "./validate";
 import { getRatingsOfStudent, getReport } from "../../redux/actions";
+import styles from "../Form/Form.module.css"
 import Swal from "sweetalert2";
 
 export default function AssingRatings({ show, handleClose, studentId }) {
@@ -94,9 +95,9 @@ export default function AssingRatings({ show, handleClose, studentId }) {
     <div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Asigna la calificación</Modal.Title>
+          <Modal.Title className={styles.modelTittle}>Asigna la calificación</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={styles.formGroup}>
           <div className="row mb-4">
             <div className="col">
               <input
@@ -150,7 +151,7 @@ export default function AssingRatings({ show, handleClose, studentId }) {
             })}
           </select>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className={styles.buttonContainer}>
           <Button variant="primary" onClick={handleSubmit}>
             Asignar
           </Button>

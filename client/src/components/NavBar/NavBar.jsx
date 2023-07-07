@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
+import styles from "./NavBar.module.css";
 
 export default function NavBar() {
   return (
-    <nav className="grid text-center bg-secondary p-2">
+    <nav className={`grid text-center p-2 ${styles.container}`}>
       <NavLink exact to="/" className="btn btn-light m-2 px-4">
         Reporte
       </NavLink>

@@ -1,6 +1,7 @@
 import FormSubject from "../../components/Form/Subjects/FormSubject";
 import TableSubjects from "../../components/Tables/TableSubjects";
 import { useState } from "react";
+import styles from "../index.css"
 
 export default function Subject() {
   const [isUpdate, setIsUpdate] = useState(false);

@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import "./Tables.module.css"
 
 export default function TableReport() {
   const report = useSelector((state) => state.report);
@@ -10,7 +11,7 @@ export default function TableReport() {
           Debes asignar una calificación a un estudiante.*
         </span>
       ) : null}
-      <table className="table table-bordered table-striped mt-3">
+      <table >
         <thead>
           <tr className="text-center">
             <th scope="col">Año Académico</th>

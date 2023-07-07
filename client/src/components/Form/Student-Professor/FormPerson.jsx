@@ -154,7 +154,7 @@ export default function FormPerson({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title className={style.modelTittle}>Formulario de creación.</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form className={style.form}>
